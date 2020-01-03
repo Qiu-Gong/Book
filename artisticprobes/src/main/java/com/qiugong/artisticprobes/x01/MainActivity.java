@@ -18,12 +18,34 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (savedInstanceState != null) {
+            String value = savedInstanceState.getString("QiuGong");
+            Log.d(TAG, value);
+        }
+
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "onSaveInstanceState");
+        outState.putString("QiuGong", "1234");
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d(TAG, "onRestoreInstanceState");
+        if (savedInstanceState != null) {
+            String value = savedInstanceState.getString("QiuGong");
+            Log.d(TAG, value);
+        }
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
