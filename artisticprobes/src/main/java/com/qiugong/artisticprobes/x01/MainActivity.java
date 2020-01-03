@@ -2,6 +2,7 @@ package com.qiugong.artisticprobes.x01;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -82,5 +83,11 @@ public class MainActivity extends Activity {
     protected void onDestroy() {
         Log.d(TAG, "onDestroy");
         super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged:" + newConfig.toString());
+        super.onConfigurationChanged(newConfig);
     }
 }
