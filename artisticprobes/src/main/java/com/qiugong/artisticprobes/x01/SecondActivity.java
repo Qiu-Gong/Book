@@ -1,29 +1,20 @@
 package com.qiugong.artisticprobes.x01;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.qiugong.artisticprobes.R;
 
-public class MainActivity extends Activity {
+public class SecondActivity extends Activity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "SecondActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
-            }
-        });
+        setContentView(R.layout.activity_second);
     }
 
     @Override
