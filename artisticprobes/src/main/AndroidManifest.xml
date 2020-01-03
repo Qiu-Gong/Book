@@ -14,6 +14,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".x01.SecondActivity"/>
+        <activity android:name=".x01.SecondActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
     </application>
 </manifest>
