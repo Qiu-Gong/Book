@@ -16,11 +16,13 @@
 
         <activity
             android:name=".x01.SecondActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTask"
+            android:taskAffinity="com.qiugong.book2" />
 
         <activity
             android:name=".x01.ThreeActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:taskAffinity="com.qiugong.book2" />
 
         <activity
             android:name=".x01.FourActivity"
