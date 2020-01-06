@@ -17,6 +17,10 @@
         <activity android:name=".x01.SecondActivity">
             <intent-filter>
                 <action android:name="com.ryg.charpter_1.c" />
+
+                <category android:name="com.qiugong.b" />
+                <category android:name="com.qiugong.c" />
+                <category android:name="com.qiugong.d" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

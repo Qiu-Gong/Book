@@ -3,6 +3,7 @@ package com.qiugong.artisticprobes.x01;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +31,9 @@ public class BaseActivity extends Activity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 必须含有 action，category 必须包含在xml中
                 Intent intent = new Intent("com.ryg.charpter_1.c");
+                intent.addCategory("com.qiugong.b");
                 startActivity(intent);
             }
         });
