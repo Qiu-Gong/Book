@@ -33,7 +33,7 @@ public class BaseActivity extends Activity {
             public void onClick(View v) {
                 // 必须含有 action，category 必须包含在xml中
                 Intent intent = new Intent();
-                intent.setDataAndType(Uri.parse("http://www.baidu.com"),"audio/mpeg");
+                intent.setDataAndType(Uri.parse("file://abc"), "text/plain");
                 startActivity(intent);
             }
         });

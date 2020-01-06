@@ -16,12 +16,10 @@
 
         <activity android:name=".x01.SecondActivity">
             <intent-filter>
-                <data
-                    android:mimeType="video/mpeg"
-                    android:scheme="http" />
-                <data
-                    android:mimeType="audio/mpeg"
-                    android:scheme="http" />
+                <action android:name="com.ryg.charpter_1.c" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
 
