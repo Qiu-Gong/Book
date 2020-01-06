@@ -32,8 +32,8 @@ public class BaseActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // 必须含有 action，category 必须包含在xml中
-                Intent intent = new Intent("com.ryg.charpter_1.c");
-                intent.addCategory("com.qiugong.b");
+                Intent intent = new Intent();
+                intent.setDataAndType(Uri.parse("http://www.baidu.com"),"audio/mpeg");
                 startActivity(intent);
             }
         });
