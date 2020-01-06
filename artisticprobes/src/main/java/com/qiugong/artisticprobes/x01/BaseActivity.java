@@ -30,8 +30,8 @@ public class BaseActivity extends Activity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BaseActivity.this,
-                        MainActivity.class));
+                Intent intent = new Intent("com.ryg.charpter_1.c");
+                startActivity(intent);
             }
         });
 

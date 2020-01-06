@@ -14,7 +14,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".x01.SecondActivity" />
+        <activity android:name=".x01.SecondActivity">
+            <intent-filter>
+                <action android:name="com.ryg.charpter_1.c" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".x01.ThreeActivity"
