@@ -14,15 +14,11 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".x01.SecondActivity"
-            android:launchMode="singleTask"
-            android:taskAffinity="com.qiugong.book2" />
+        <activity android:name=".x01.SecondActivity" />
 
         <activity
             android:name=".x01.ThreeActivity"
-            android:launchMode="singleTask"
-            android:taskAffinity="com.qiugong.book2" />
+            android:taskAffinity="com.qiugong.book2"/>
 
         <activity
             android:name=".x01.FourActivity"
