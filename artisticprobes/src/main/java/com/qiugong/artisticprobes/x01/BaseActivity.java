@@ -3,7 +3,6 @@ package com.qiugong.artisticprobes.x01;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +15,7 @@ import com.qiugong.artisticprobes.R;
 public class BaseActivity extends Activity {
 
     protected String TAG = this.getClass().getSimpleName();
+    public static int UserId = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,8 @@ public class BaseActivity extends Activity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 必须含有 action，category 必须包含在xml中
-                Intent intent = new Intent();
-                intent.setDataAndType(Uri.parse("file://abc"), "text/plain");
+                Intent intent = new Intent(BaseActivity.this,
+                        MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -43,8 +42,6 @@ public class BaseActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(BaseActivity.this,
                         SecondActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });
@@ -54,8 +51,6 @@ public class BaseActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(BaseActivity.this,
                         ThreeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }
         });

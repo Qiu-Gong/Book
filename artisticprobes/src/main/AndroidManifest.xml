@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qiugong.artisticprobes">
 
-    <application>
+    <application android:name=".x2.MyApplication">
         <activity
             android:name=".x01.MainActivity"
             android:configChanges="screenSize|orientation"
@@ -14,18 +14,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".x01.SecondActivity">
-            <intent-filter>
-                <action android:name="com.ryg.charpter_1.c" />
-                <category android:name="android.intent.category.DEFAULT" />
+        <activity android:name=".x01.SecondActivity"
+            android:process=":remote"/>
 
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".x01.ThreeActivity"
-            android:taskAffinity="com.qiugong.book2" />
+        <activity android:name=".x01.ThreeActivity"
+            android:process="com.qiugong.book.remote"/>
 
         <activity
             android:name=".x01.FourActivity"
