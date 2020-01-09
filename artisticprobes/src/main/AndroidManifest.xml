@@ -49,4 +49,11 @@
             android:name=".x02.aidl.BookManagerService"
             android:process=":remote" />
     </application>
+
+    <!-- BookManager 权限 -->
+    <permission
+        android:name="com.qiugong.artisticprobes.permission.ACCESS_BOOK_SERVICE"
+        android:protectionLevel="normal" />
+
+    <uses-permission android:name="com.qiugong.artisticprobes.permission.ACCESS_BOOK_SERVICE"/>
 </manifest>

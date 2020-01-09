@@ -2,6 +2,7 @@ package com.qiugong.artisticprobes.x02.aidl;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
@@ -69,6 +70,12 @@ public class BookManagerService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        int check = checkCallingOrSelfPermission("com.qiugong.artisticprobes.permission.ACCESS_BOOK_SERVICE");
+        Tools.log(TAG, "on bind check = " + check);
+        if (check == PackageManager.PERMISSION_DENIED) {
+            return null;
+        }
+
         return mBinder;
     }
 
