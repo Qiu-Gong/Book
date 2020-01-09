@@ -40,6 +40,19 @@ public class BookManagerActivity extends Activity {
         }
     };
 
+    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() {
+        @Override
+        public void binderDied() {
+            Tools.log(TAG, "binder died. tname:" + Thread.currentThread().getName());
+            if (mRemoteBookManager == null) {
+                return;
+            }
+
+            mRemoteBookManager.asBinder().unlinkToDeath(mDeathRecipient, 0);
+            mRemoteBookManager = null;
+        }
+    };
+
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -47,6 +60,7 @@ public class BookManagerActivity extends Activity {
 
             try {
                 mRemoteBookManager = bookManager;
+                mRemoteBookManager.asBinder().linkToDeath(mDeathRecipient, 0);
                 List<Book> list = bookManager.getBookList();
                 Tools.log(TAG, "query book list:" + Arrays.toString(list.toArray()));
 
