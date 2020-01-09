@@ -39,15 +39,29 @@
 
         <!-- BookManager -->
         <activity android:name=".x02.aidl.BookManagerActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <service
+            android:name=".x02.aidl.BookManagerService"
+            android:process=":remote" />
+
+        <!-- Provider -->
+        <activity android:name=".x02.provider.ProviderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".x02.aidl.BookManagerService"
-            android:process=":remote" />
+        <provider
+            android:name=".x02.provider.BookProvider"
+            android:authorities="com.qiugong.artisticprobes.provider"
+            android:permission="com.qiugong.artisticprobes.permission.PROVIDER"
+            android:process=":provider" />
     </application>
 
     <!-- BookManager 权限 -->
