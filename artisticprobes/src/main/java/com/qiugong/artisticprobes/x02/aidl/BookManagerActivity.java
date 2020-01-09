@@ -10,9 +10,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
-import android.util.Log;
 
 import com.qiugong.artisticprobes.R;
+import com.qiugong.artisticprobes.Tools;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +32,7 @@ public class BookManagerActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_NEW_BOOK_ARRIVED:
-                    Log.d(TAG, "receive new book :" + msg.obj);
+                    Tools.log(TAG, "receive new book :" + msg.obj);
                     break;
                 default:
                     super.handleMessage(msg);
@@ -48,13 +48,13 @@ public class BookManagerActivity extends Activity {
             try {
                 mRemoteBookManager = bookManager;
                 List<Book> list = bookManager.getBookList();
-                Log.i(TAG, "query book list:" + Arrays.toString(list.toArray()));
+                Tools.log(TAG, "query book list:" + Arrays.toString(list.toArray()));
 
                 Book newBook = new Book(3, "789");
                 bookManager.addBook(newBook);
 
                 list = bookManager.getBookList();
-                Log.i(TAG, "query book list:" + Arrays.toString(list.toArray()));
+                Tools.log(TAG, "query book list:" + Arrays.toString(list.toArray()));
 
                 bookManager.registerListener(mOnNewBookArrivedListener);
             } catch (RemoteException e) {
@@ -65,7 +65,7 @@ public class BookManagerActivity extends Activity {
         @Override
         public void onServiceDisconnected(ComponentName name) {
             mRemoteBookManager = null;
-            Log.e(TAG, "binder died.");
+            Tools.log(TAG, "binder died.");
         }
     };
 
@@ -73,6 +73,7 @@ public class BookManagerActivity extends Activity {
             new IOnNewBookArrivedListener.Stub() {
                 @Override
                 public void onNewBookArrived(Book newBook) throws RemoteException {
+                    Tools.log(TAG, "mOnNewBookArrivedListener");
                     mHandler.obtainMessage(MESSAGE_NEW_BOOK_ARRIVED, newBook).sendToTarget();
                 }
             };
@@ -90,7 +91,7 @@ public class BookManagerActivity extends Activity {
     protected void onDestroy() {
         if (mRemoteBookManager != null && mRemoteBookManager.asBinder().isBinderAlive()) {
             try {
-                Log.i(TAG, "unregister listener:" + mOnNewBookArrivedListener);
+                Tools.log(TAG, "unregister listener:" + mOnNewBookArrivedListener);
                 mRemoteBookManager.unregisterListener(mOnNewBookArrivedListener);
             } catch (RemoteException e) {
                 e.printStackTrace();
