@@ -27,10 +27,10 @@
 
         <!-- Messenger -->
         <activity android:name=".x02.messenger.MessengerActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
         <service
@@ -39,10 +39,10 @@
 
         <!-- BookManager -->
         <activity android:name=".x02.aidl.BookManagerActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
         <service
@@ -51,10 +51,10 @@
 
         <!-- Provider -->
         <activity android:name=".x02.provider.ProviderActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+            <!--            </intent-filter>-->
         </activity>
 
         <provider
@@ -62,12 +62,27 @@
             android:authorities="com.qiugong.artisticprobes.provider"
             android:permission="com.qiugong.artisticprobes.permission.PROVIDER"
             android:process=":provider" />
+
+        <!-- socket -->
+        <activity android:name=".x02.socket.TCPClientActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".x02.socket.TCPServerService"
+            android:process=":remote" />
     </application>
 
     <!-- BookManager 权限 -->
     <permission
         android:name="com.qiugong.artisticprobes.permission.ACCESS_BOOK_SERVICE"
         android:protectionLevel="normal" />
+    <uses-permission android:name="com.qiugong.artisticprobes.permission.ACCESS_BOOK_SERVICE" />
 
-    <uses-permission android:name="com.qiugong.artisticprobes.permission.ACCESS_BOOK_SERVICE"/>
+    <!-- socket -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
