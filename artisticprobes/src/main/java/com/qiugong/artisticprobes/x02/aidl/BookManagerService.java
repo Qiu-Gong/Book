@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.Parcel;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 
@@ -26,6 +27,18 @@ public class BookManagerService extends Service {
     private RemoteCallbackList<IOnNewBookArrivedListener> mListenerList = new RemoteCallbackList<>();
 
     private Binder mBinder = new IBookManager.Stub() {
+
+        @Override
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+            int check = checkCallingOrSelfPermission("com.qiugong.artisticprobes.permission.ACCESS_BOOK_SERVICE");
+            Tools.log(TAG, "onTransact on bind check = " + check);
+            if (check == PackageManager.PERMISSION_DENIED) {
+                return false;
+            }
+
+            return super.onTransact(code, data, reply, flags);
+        }
+
         @Override
         public List<Book> getBookList() throws RemoteException {
             return mBookList;
