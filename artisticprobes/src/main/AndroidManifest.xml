@@ -12,15 +12,12 @@
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
-
         <activity
             android:name=".x01.SecondActivity"
             android:process=":remote" />
-
         <activity
             android:name=".x01.ThreeActivity"
             android:process="com.qiugong.book.remote" />
-
         <activity
             android:name=".x01.FourActivity"
             android:launchMode="singleInstance" />
@@ -32,7 +29,6 @@
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
-
         <service
             android:name=".x02.messenger.MessengerService"
             android:process=":remote" />
@@ -44,7 +40,6 @@
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
-
         <service
             android:name=".x02.aidl.BookManagerService"
             android:process=":remote" />
@@ -56,7 +51,6 @@
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
-
         <provider
             android:name=".x02.provider.BookProvider"
             android:authorities="com.qiugong.artisticprobes.provider"
@@ -65,14 +59,24 @@
 
         <!-- socket -->
         <activity android:name=".x02.socket.TCPClientActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <service
+            android:name=".x02.socket.TCPServerService"
+            android:process=":remote" />
+
+        <!-- binder pools -->
+        <activity android:name=".x02.binderpools.BinderPoolActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <service
-            android:name=".x02.socket.TCPServerService"
+            android:name=".x02.binderpools.BinderPoolService"
             android:process=":remote" />
     </application>
 
