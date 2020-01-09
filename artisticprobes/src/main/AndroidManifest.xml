@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qiugong.artisticprobes">
 
-    <application android:name=".x2.MyApplication">
+    <application android:name=".x02.MyApplication">
         <activity
             android:name=".x01.MainActivity"
             android:configChanges="screenSize|orientation"

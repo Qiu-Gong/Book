@@ -1,4 +1,4 @@
-package com.qiugong.artisticprobes.x2;
+package com.qiugong.artisticprobes.x02;
 
 import android.app.Application;
 import android.util.Log;
