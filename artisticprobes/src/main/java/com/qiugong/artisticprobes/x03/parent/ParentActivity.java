@@ -1,4 +1,4 @@
-package com.qiugong.artisticprobes.x03;
+package com.qiugong.artisticprobes.x03.parent;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qiugong.artisticprobes.R;
+import com.qiugong.artisticprobes.x03.Utils;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 /**
  * @author qzx 2019/5/23.
  */
-public class InterceptActivity extends Activity {
+public class ParentActivity extends Activity {
 
     private static final String TAG = "DemoActivity_1";
 
@@ -30,7 +31,7 @@ public class InterceptActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intercept);
+        setContentView(R.layout.activity_parent);
         Log.d(TAG, "onCreate");
         initView();
     }
@@ -64,7 +65,7 @@ public class InterceptActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(InterceptActivity.this, "click item", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ParentActivity.this, "click item", Toast.LENGTH_SHORT).show();
             }
         });
     }

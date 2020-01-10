@@ -80,7 +80,7 @@
             android:process=":remote" />
 
         <!-- external -->
-        <activity android:name=".x03.InterceptActivity">
+        <activity android:name=".x03.parent.ParentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
