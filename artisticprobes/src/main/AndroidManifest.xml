@@ -87,6 +87,14 @@
 <!--            </intent-filter>-->
         </activity>
         <activity android:name=".x03.child.ChildActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <!-- ViewActivity -->
+        <activity android:name=".x04.ViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
