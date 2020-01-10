@@ -70,14 +70,22 @@
 
         <!-- binder pools -->
         <activity android:name=".x02.binderpools.BinderPoolActivity">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <service
+            android:name=".x02.binderpools.BinderPoolService"
+            android:process=":remote" />
+
+        <!-- external -->
+        <activity android:name=".x03.InterceptActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".x02.binderpools.BinderPoolService"
-            android:process=":remote" />
     </application>
 
     <!-- BookManager 权限 -->
