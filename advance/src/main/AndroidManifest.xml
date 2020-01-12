@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qiugong.advance">
 
-    <application>
+    <application android:name=".x15.MyApplication">
         <!-- Hook -->
         <activity android:name=".x14.hook.HookActivity">
             <intent-filter>
@@ -11,6 +11,13 @@
         </activity>
         <activity android:name=".x14.hook.TestActivity" />
 
-
+        <!-- plugin activity -->
+        <activity android:name=".x15.activity.PluginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".x15.activity.StubActivity" />
     </application>
 </manifest>
