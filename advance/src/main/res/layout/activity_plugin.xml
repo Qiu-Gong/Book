@@ -7,12 +7,19 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Btn" />
+        android:text="插件Activity 1" />
 
     <Button
         android:id="@+id/btn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/btn"
-        android:text="Btn2" />
+        android:layout_below="@id/btn"
+        android:text="插件Activity 2" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn2"
+        android:text="插件Service" />
 </RelativeLayout>

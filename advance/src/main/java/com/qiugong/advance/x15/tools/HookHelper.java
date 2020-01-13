@@ -69,4 +69,31 @@ public class HookHelper {
         FieldUtil.setField(activityThreadClazz, activityThread, "mInstrumentation",
                 new InstrumentationProxy((Instrumentation) mInstrumentationField.get(activityThread), context.getPackageManager()));
     }
+
+    public static void hookServiceAMS() throws Exception {
+        Object defaultSingleton;
+        if (Build.VERSION.SDK_INT >= 26) {
+            // 1. 取出 ActivityManager.IActivityManagerSingleton
+            Class<?> activityManageClazz = Class.forName("android.app.ActivityManager");
+            defaultSingleton = FieldUtil.getField(activityManageClazz, null, "IActivityManagerSingleton");
+        } else {
+            // 1. 取出 ActivityManager.gDefault
+            Class<?> activityManageClazz = Class.forName("android.app.ActivityManagerNative");
+            defaultSingleton = FieldUtil.getField(activityManageClazz, null, "gDefault");
+        }
+
+        // 2. 再取出 ActivityManager.IActivityManagerSingleton.Singleton.mInstance
+        Class<?> singletonClazz = Class.forName("android.util.Singleton");
+        Field mInstanceField = FieldUtil.getField(singletonClazz, "mInstance");
+        Object iActivityManager = mInstanceField.get(defaultSingleton);
+
+        // 3. 创建 IActivityManagerProxy
+        Class<?> iActivityMangerClazz = Class.forName("android.app.IActivityManager");
+        Object proxy = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
+                new Class<?>[]{iActivityMangerClazz},
+                new IActivityManagerProxy(iActivityManager));
+
+        // 4. 重新赋值
+        mInstanceField.set(defaultSingleton, proxy);
+    }
 }

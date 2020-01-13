@@ -12,12 +12,15 @@
         <activity android:name=".x14.hook.TestActivity" />
 
         <!-- plugin activity -->
-        <activity android:name=".x15.activity.PluginActivity">
+        <activity android:name=".x15.PluginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".x15.activity.StubActivity" />
+
+        <!-- plugin service -->
+        <service android:name=".x15.service.ProxyService" />
     </application>
 </manifest>
