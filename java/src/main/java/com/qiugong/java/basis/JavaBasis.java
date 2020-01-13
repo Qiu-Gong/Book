@@ -37,8 +37,8 @@ public class JavaBasis {
         System.out.println(dog.getName() + "->A");
 
         Dog dog2 = new Dog("A");
-        func2(dog);
-        System.out.println(dog.getName() + "->B");
+        func2(dog2);
+        System.out.println(dog2.getName() + "->B");
     }
 
     private static void func(Dog dog) {
