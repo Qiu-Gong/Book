@@ -1,2 +1,2 @@
-include ':app', ':artisticprobes', ':advance'
+include ':app', ':artisticprobes', ':advance', ':java'
 rootProject.name='Book'
