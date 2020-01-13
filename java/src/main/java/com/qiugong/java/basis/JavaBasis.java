@@ -39,6 +39,30 @@ public class JavaBasis {
         Dog dog2 = new Dog("A");
         func2(dog2);
         System.out.println(dog2.getName() + "->B");
+
+        /////////////////////////////////////////////
+        A a = new A();
+        B b = new B();
+        C c = new C();
+        D d = new D();
+        a.show(a);// A.show(A)
+        a.show(b);// A.show(A)
+        b.show(c);// A.show(C)
+        b.show(d);// A.show(C)
+
+        A ba = new B();
+        ba.show(c);// A.show(C)
+        ba.show(d);// A.show(C)
+
+        /////////////////////////////////////////////
+        CloneExample e1 = new CloneExample();
+        try {
+            CloneExample e2 = e1.clone();
+            e2.a = 10;
+            System.out.println((e1.a == e2.a) + "->true");
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void func(Dog dog) {
@@ -69,6 +93,40 @@ public class JavaBasis {
 
         String getObjectAddress() {
             return super.toString();
+        }
+    }
+
+    static class A {
+        public void show(A obj) {
+            System.out.println("A.show(A)");
+        }
+
+        public void show(C obj) {
+            System.out.println("A.show(C)");
+        }
+    }
+
+    static class B extends A {
+        @Override
+        public void show(A obj) {
+            System.out.println("B.show(A)");
+        }
+    }
+
+    static class C extends B {
+    }
+
+    static class D extends C {
+    }
+
+    static class CloneExample implements Cloneable {
+        private int a = 2;
+        private int b = 4;
+
+        @Override
+        public CloneExample clone() throws CloneNotSupportedException {
+            System.out.println("clone");
+            return (CloneExample) super.clone();
         }
     }
 }
