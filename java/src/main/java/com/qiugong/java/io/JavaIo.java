@@ -1,4 +1,4 @@
-package com.qiugong.java.basis;
+package com.qiugong.java.io;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
