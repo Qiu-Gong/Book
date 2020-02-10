@@ -13,5 +13,31 @@ public class HandlerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                QLooper.prepare();
+
+                final QHandler handler = new QHandler() {
+                    @Override
+                    public void handleMessage(QMessage msg) {
+                        System.out.println(msg.obj.toString());
+                    }
+                };
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        QMessage message = new QMessage();
+                        message.what = 1;
+                        message.obj = "大家好！";
+                        handler.sendMessage(message);
+                    }
+                }).start();
+
+                QLooper.loop();
+            }
+        }).start();
     }
 }
