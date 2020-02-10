@@ -8,4 +8,4 @@
 
 而 java 可以直接用 main 来运行例子。
 
-该工程 sdk 配置为 26，同样开启对应 Api-26 模拟器，就可以 debug Android 源代码。 
+该工程 sdk 配置为 26，同样开启对应 Api-26 模拟器，就可以 debug Android 8.0 源代码。 

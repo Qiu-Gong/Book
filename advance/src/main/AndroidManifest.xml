@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qiugong.advance">
 
-    <application android:name=".x15.MyApplication">
+    <application android:name=".x15.MyApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
         <!-- Hook -->
         <activity android:name=".x14.hook.HookActivity">
             <intent-filter>
@@ -12,12 +16,7 @@
         <activity android:name=".x14.hook.TestActivity" />
 
         <!-- plugin activity -->
-        <activity android:name=".x15.PluginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".x15.PluginActivity"/>
         <activity android:name=".x15.activity.StubActivity" />
 
         <!-- plugin service -->
