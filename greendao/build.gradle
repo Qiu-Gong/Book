@@ -4,7 +4,7 @@ android {
     compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.qiugong.eventbus"
+        applicationId "com.qiugong.greendao"
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
@@ -18,12 +18,10 @@ android {
             minifyEnabled false
         }
     }
-
 }
 
 dependencies {
     testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
