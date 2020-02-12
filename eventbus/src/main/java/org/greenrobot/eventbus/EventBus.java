@@ -47,8 +47,11 @@ public class EventBus {
     private static final EventBusBuilder DEFAULT_BUILDER = new EventBusBuilder();
     private static final Map<Class<?>, List<Class<?>>> eventTypesCache = new HashMap<>();
 
+    // 主表
     private final Map<Class<?>, CopyOnWriteArrayList<Subscription>> subscriptionsByEventType;
+    // 日常使用中仅用于判断某个对象是否注册过
     private final Map<Object, List<Class<?>>> typesBySubscriber;
+    // 粘性事件
     private final Map<Class<?>, Object> stickyEvents;
 
     private final ThreadLocal<PostingThreadState> currentPostingThreadState = new ThreadLocal<PostingThreadState>() {
@@ -111,14 +114,26 @@ public class EventBus {
 
     EventBus(EventBusBuilder builder) {
         logger = builder.getLogger();
+        // 1.
         subscriptionsByEventType = new HashMap<>();
+        // 2.
         typesBySubscriber = new HashMap<>();
+        // 3.
         stickyEvents = new ConcurrentHashMap<>();
+
+        // 主线程事件发送器
         mainThreadSupport = builder.getMainThreadSupport();
-        mainThreadPoster = mainThreadSupport != null ? mainThreadSupport.createPoster(this) : null;
+        mainThreadPoster = mainThreadSupport != null
+                ? mainThreadSupport.createPoster(this) : null;
+        // 后台事件发送器
         backgroundPoster = new BackgroundPoster(this);
+        // 异步运行，可以同时接收多个任务
         asyncPoster = new AsyncPoster(this);
-        indexCount = builder.subscriberInfoIndexes != null ? builder.subscriberInfoIndexes.size() : 0;
+
+        indexCount = builder.subscriberInfoIndexes != null
+                ? builder.subscriberInfoIndexes.size() : 0;
+
+        // 5. 订阅方法查询的一个对象
         subscriberMethodFinder = new SubscriberMethodFinder(builder.subscriberInfoIndexes,
                 builder.strictMethodVerification, builder.ignoreGeneratedIndex);
         logSubscriberExceptions = builder.logSubscriberExceptions;
@@ -127,6 +142,8 @@ public class EventBus {
         sendNoSubscriberEvent = builder.sendNoSubscriberEvent;
         throwSubscriberException = builder.throwSubscriberException;
         eventInheritance = builder.eventInheritance;
+
+        // 6.
         executorService = builder.executorService;
     }
 
@@ -140,9 +157,11 @@ public class EventBus {
      */
     public void register(Object subscriber) {
         Class<?> subscriberClass = subscriber.getClass();
+        // 1. 订阅方法列表
         List<SubscriberMethod> subscriberMethods = subscriberMethodFinder.findSubscriberMethods(subscriberClass);
         synchronized (this) {
             for (SubscriberMethod subscriberMethod : subscriberMethods) {
+                // 2. 进行订阅
                 subscribe(subscriber, subscriberMethod);
             }
         }
@@ -150,8 +169,11 @@ public class EventBus {
 
     // Must be called in synchronized block
     private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) {
+        // eventType = Friend
         Class<?> eventType = subscriberMethod.eventType;
+        // subscriber = MainActivity
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
+        // 1.
         CopyOnWriteArrayList<Subscription> subscriptions = subscriptionsByEventType.get(eventType);
         if (subscriptions == null) {
             subscriptions = new CopyOnWriteArrayList<>();
@@ -163,6 +185,7 @@ public class EventBus {
             }
         }
 
+        // 2. 优先级的判断
         int size = subscriptions.size();
         for (int i = 0; i <= size; i++) {
             if (i == size || subscriberMethod.priority > subscriptions.get(i).subscriberMethod.priority) {
@@ -171,6 +194,7 @@ public class EventBus {
             }
         }
 
+        // 3.
         List<Class<?>> subscribedEvents = typesBySubscriber.get(subscriber);
         if (subscribedEvents == null) {
             subscribedEvents = new ArrayList<>();
@@ -178,6 +202,7 @@ public class EventBus {
         }
         subscribedEvents.add(eventType);
 
+        // 4. 判断是否是 sticky事件
         if (subscriberMethod.sticky) {
             if (eventInheritance) {
                 // Existing sticky events of all subclasses of eventType have to be considered.
@@ -253,10 +278,12 @@ public class EventBus {
 
     /** Posts the given event to the event bus. */
     public void post(Object event) {
+        // 1.
         PostingThreadState postingState = currentPostingThreadState.get();
         List<Object> eventQueue = postingState.eventQueue;
         eventQueue.add(event);
 
+        // 2.
         if (!postingState.isPosting) {
             postingState.isMainThread = isMainThread();
             postingState.isPosting = true;
@@ -379,11 +406,14 @@ public class EventBus {
     private void postSingleEvent(Object event, PostingThreadState postingState) throws Error {
         Class<?> eventClass = event.getClass();
         boolean subscriptionFound = false;
+        // 1.
         if (eventInheritance) {
+            // 2.
             List<Class<?>> eventTypes = lookupAllEventTypes(eventClass);
             int countTypes = eventTypes.size();
             for (int h = 0; h < countTypes; h++) {
                 Class<?> clazz = eventTypes.get(h);
+                // 3.
                 subscriptionFound |= postSingleEventForEventType(event, postingState, clazz);
             }
         } else {

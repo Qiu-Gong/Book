@@ -53,11 +53,13 @@ class SubscriberMethodFinder {
     }
 
     List<SubscriberMethod> findSubscriberMethods(Class<?> subscriberClass) {
+        // 1. MainActivity 做缓存加快判断
         List<SubscriberMethod> subscriberMethods = METHOD_CACHE.get(subscriberClass);
         if (subscriberMethods != null) {
             return subscriberMethods;
         }
 
+        // 2. ignoreGeneratedIndex = false
         if (ignoreGeneratedIndex) {
             subscriberMethods = findUsingReflection(subscriberClass);
         } else {
@@ -73,8 +75,10 @@ class SubscriberMethodFinder {
     }
 
     private List<SubscriberMethod> findUsingInfo(Class<?> subscriberClass) {
+        // 1.
         FindState findState = prepareFindState();
         findState.initForSubscriber(subscriberClass);
+        // 2.
         while (findState.clazz != null) {
             findState.subscriberInfo = getSubscriberInfo(findState);
             if (findState.subscriberInfo != null) {
@@ -85,10 +89,12 @@ class SubscriberMethodFinder {
                     }
                 }
             } else {
+                // 3.
                 findUsingReflectionInSingleClass(findState);
             }
             findState.moveToSuperclass();
         }
+        // 4.
         return getMethodsAndRelease(findState);
     }
 
@@ -174,6 +180,7 @@ class SubscriberMethodFinder {
                 if (parameterTypes.length == 1) {
                     Subscribe subscribeAnnotation = method.getAnnotation(Subscribe.class);
                     if (subscribeAnnotation != null) {
+                        // 重点
                         Class<?> eventType = parameterTypes[0];
                         if (findState.checkAdd(method, eventType)) {
                             ThreadMode threadMode = subscribeAnnotation.threadMode();
