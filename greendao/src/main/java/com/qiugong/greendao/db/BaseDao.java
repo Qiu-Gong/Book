@@ -3,12 +3,15 @@ package com.qiugong.greendao.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.qiugong.greendao.annotation.DbField;
 import com.qiugong.greendao.annotation.DbTable;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,6 +36,7 @@ public class BaseDao<T> implements IBaseDao<T> {
                 entityClass.getSimpleName();
 
         String sql = createTableSql();
+        Log.d(TAG, "init sql:" + sql);
         this.sqLiteDatabase.execSQL(sql);
         columnMapField();
     }
@@ -101,8 +105,7 @@ public class BaseDao<T> implements IBaseDao<T> {
         return builder.toString();
     }
 
-    @Override
-    public long insert(T entity) {
+    private ContentValues convertContentValues(T entity) {
         ContentValues values = new ContentValues();
 
         Set<String> column = columnFieldMap.keySet();
@@ -111,18 +114,21 @@ public class BaseDao<T> implements IBaseDao<T> {
                 Field field = columnFieldMap.get(key);
                 field.setAccessible(true);
                 Class<?> type = field.getType();
+                Object value = field.get(entity);
+                if (value == null) continue;
+
                 if (type == String.class) {
-                    values.put(key, (String) field.get(entity));
+                    values.put(key, (String) value);
                 } else if (type == Integer.class) {
-                    values.put(key, (Integer) field.get(entity));
+                    values.put(key, (Integer) value);
                 } else if (type == Long.class) {
-                    values.put(key, (Long) field.get(entity));
+                    values.put(key, (Long) value);
                 } else if (type == Double.class) {
-                    values.put(key, (Double) field.get(entity));
+                    values.put(key, (Double) value);
                 } else if (type == byte[].class) {
-                    values.put(key, (byte[]) field.get(entity));
-                }else if (type == Boolean.class) {
-                    values.put(key, (Boolean) field.get(entity));
+                    values.put(key, (byte[]) value);
+                } else if (type == Boolean.class) {
+                    values.put(key, (Boolean) value);
                 } else {
                     throw new RuntimeException("type is error:" + type.getName());
                 }
@@ -130,7 +136,97 @@ public class BaseDao<T> implements IBaseDao<T> {
                 e.printStackTrace();
             }
         }
+        Log.d(TAG, "ContentValues: " + values.toString());
 
+        return values;
+    }
+
+    private List<T> convertQuery(Cursor query, T where) throws Exception {
+        List<T> result = new ArrayList<>();
+
+        while (query.moveToNext()) {
+            String[] columnNames = query.getColumnNames();
+            T item = (T) where.getClass().newInstance();
+            for (String columnName : columnNames) {
+
+                Field field = columnFieldMap.get(columnName);
+                if (item != null && field != null) {
+                    field.setAccessible(true);
+                    Class<?> type = field.getType();
+                    int columnIndex = query.getColumnIndex(columnName);
+
+                    if (type == String.class) {
+                        field.set(item, query.getString(columnIndex));
+                    } else if (type == Integer.class) {
+                        field.set(item, query.getInt(columnIndex));
+                    } else if (type == Long.class) {
+                        field.set(item, query.getLong(columnIndex));
+                    } else if (type == Double.class) {
+                        field.set(item, query.getDouble(columnIndex));
+                    } else if (type == byte[].class) {
+                        field.set(item, query.getBlob(columnIndex));
+                    } else if (type == Boolean.class) {
+                        field.set(item, query.getString(columnIndex));
+                    } else {
+                        throw new RuntimeException("type is error:" + type.getName());
+                    }
+                }
+            }
+            result.add(item);
+        }
+
+        Log.d(TAG, "convertQuery: " + result.toString());
+        return result;
+    }
+
+    @Override
+    public long insert(T entity) {
+        ContentValues values = convertContentValues(entity);
         return sqLiteDatabase.insert(tableName, null, values);
+    }
+
+    @Override
+    public long update(T entity, T where) {
+        ContentValues values = convertContentValues(entity);
+        Condition<T> condition = new Condition<>(columnFieldMap, where);
+
+        return sqLiteDatabase.update(tableName, values,
+                condition.getWhereClause(),
+                condition.getWhereArgs());
+    }
+
+    @Override
+    public int delete(T where) {
+        Condition<T> condition = new Condition<>(columnFieldMap, where);
+        return sqLiteDatabase.delete(tableName,
+                condition.getWhereClause(),
+                condition.getWhereArgs());
+    }
+
+    @Override
+    public List<T> query(T where) {
+        return query(where, null, null, null);
+    }
+
+    @Override
+    public List<T> query(T where, String orderBy, Integer startIndex, Integer limit) {
+        Condition<T> condition = new Condition<>(columnFieldMap, where);
+        String limitString = null;
+        List<T> result = null;
+        if (startIndex != null && limit != null) {
+            limitString = startIndex + " , " + limit;
+        }
+
+        try {
+            Cursor query = sqLiteDatabase.query(tableName, null,
+                    condition.getWhereClause(), condition.getWhereArgs(), null,
+                    orderBy, limitString);
+            result = convertQuery(query, where);
+            query.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }

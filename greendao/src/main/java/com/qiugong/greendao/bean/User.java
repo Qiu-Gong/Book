@@ -16,9 +16,33 @@ public class User {
     @DbField("_password")
     private String password;
 
+    public User() {
+    }
+
     public User(Integer id, String account, String password) {
         this.id = id;
         this.account = account;
         this.password = password;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
