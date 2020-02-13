@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.qiugong.greendao.bean.Login;
 import com.qiugong.greendao.bean.Person;
 import com.qiugong.greendao.bean.User;
-import com.qiugong.greendao.db.BaseDao;
 import com.qiugong.greendao.db.BaseDaoFactory;
+import com.qiugong.greendao.db.IBaseDao;
+import com.qiugong.greendao.sub_sqlite.LoginDao;
+import com.qiugong.greendao.sub_sqlite.LoginDaoFactory;
 
 public class MainActivity extends Activity {
 
@@ -21,10 +24,10 @@ public class MainActivity extends Activity {
         findViewById(R.id.insert).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaseDao<Person> person = BaseDaoFactory.getOurInstance().getBaseDao(Person.class);
+                IBaseDao<Person> person = BaseDaoFactory.getOurInstance().getBaseDao(Person.class);
                 person.insert(new Person("QiuGong_" + cnt, 18, true));
 
-                BaseDao<User> user = BaseDaoFactory.getOurInstance().getBaseDao(User.class);
+                IBaseDao<User> user = BaseDaoFactory.getOurInstance().getBaseDao(User.class);
                 user.insert(new User(cnt, "Qiu", "123456"));
 
                 cnt++;
@@ -39,7 +42,7 @@ public class MainActivity extends Activity {
                 User where = new User();
                 where.setId(1);
 
-                BaseDao<User> baseDao = BaseDaoFactory.getOurInstance().getBaseDao(User.class);
+                IBaseDao<User> baseDao = BaseDaoFactory.getOurInstance().getBaseDao(User.class);
                 baseDao.update(user, where);
             }
         });
@@ -50,7 +53,7 @@ public class MainActivity extends Activity {
                 Person where = new Person();
                 where.setName("QiuGong_1");
 
-                BaseDao<Person> baseDao = BaseDaoFactory.getOurInstance().getBaseDao(Person.class);
+                IBaseDao<Person> baseDao = BaseDaoFactory.getOurInstance().getBaseDao(Person.class);
                 baseDao.delete(where);
             }
         });
@@ -61,8 +64,29 @@ public class MainActivity extends Activity {
                 User where = new User();
                 where.setPassword("123456");
 
-                BaseDao<User> baseDao = BaseDaoFactory.getOurInstance().getBaseDao(User.class);
+                IBaseDao<User> baseDao = BaseDaoFactory.getOurInstance().getBaseDao(User.class);
                 baseDao.query(where);
+            }
+        });
+
+        findViewById(R.id.login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Login login = new Login(cnt, "N0" + cnt, "123456");
+
+                IBaseDao<Login> baseDao = BaseDaoFactory.getOurInstance().getBaseDao(LoginDao.class, Login.class);
+                baseDao.insert(login);
+                cnt++;
+            }
+        });
+
+        findViewById(R.id.subInsert).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IBaseDao<Person> person = LoginDaoFactory.getOurInstance().getLoginDao(Person.class);
+                person.insert(new Person("QiuGong_" + cnt, 18, true));
+
+                cnt++;
             }
         });
     }

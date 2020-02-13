@@ -5,13 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 /**
  * @author qzx 20/2/12.
  */
-public class BaseDaoFactory {
+public class BaseDaoFactory implements IBaseDaoFactory {
 
-    private static final BaseDaoFactory ourInstance = new BaseDaoFactory();
+    private static final IBaseDaoFactory ourInstance = new BaseDaoFactory();
     private String databasePath;
     private SQLiteDatabase sqLiteDatabase;
 
-    public static BaseDaoFactory getOurInstance() {
+    public static IBaseDaoFactory getOurInstance() {
         return ourInstance;
     }
 
@@ -20,9 +20,22 @@ public class BaseDaoFactory {
         sqLiteDatabase = SQLiteDatabase.openOrCreateDatabase(databasePath, null);
     }
 
-    public <T> BaseDao<T> getBaseDao(Class<T> entityClass) {
-        BaseDao<T> baseDao = new BaseDao<>();
+    @Override
+    public <T> IBaseDao<T> getBaseDao(Class<T> entityClass) {
+        IBaseDao<T> baseDao = new BaseDao<>();
         baseDao.init(sqLiteDatabase, entityClass);
         return baseDao;
+    }
+
+    @Override
+    public <M extends BaseDao<T>, T> IBaseDao<T> getBaseDao(Class<M> daoClass, Class<T> entityClass) {
+        M m = null;
+        try {
+            m = daoClass.newInstance();
+            m.init(sqLiteDatabase, entityClass);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return m;
     }
 }

@@ -26,7 +26,8 @@ public class BaseDao<T> implements IBaseDao<T> {
     private Class<T> entityClass;
     private HashMap<String, Field> columnFieldMap;
 
-    void init(SQLiteDatabase sqLiteDatabase, Class<T> entityClass) {
+    @Override
+    public void init(SQLiteDatabase sqLiteDatabase, Class<T> entityClass) {
         this.sqLiteDatabase = sqLiteDatabase;
         this.entityClass = entityClass;
         this.columnFieldMap = new HashMap<>();

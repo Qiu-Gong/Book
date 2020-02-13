@@ -1,11 +1,15 @@
 package com.qiugong.greendao.db;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.List;
 
 /**
  * @author qzx 20/2/12.
  */
 public interface IBaseDao<T> {
+
+    void init(SQLiteDatabase sqLiteDatabase, Class<T> entityClass);
 
     // 插入
     long insert(T entity);

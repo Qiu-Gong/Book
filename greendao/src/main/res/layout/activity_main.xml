@@ -9,19 +9,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="插入" />
+
     <Button
         android:id="@+id/update"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="更新" />
+
     <Button
         android:id="@+id/delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="删除" />
+
     <Button
         android:id="@+id/select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="查询" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#ffffff" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="用户登录" />
+
+    <Button
+        android:id="@+id/subInsert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="分库插入" />
 </LinearLayout>
