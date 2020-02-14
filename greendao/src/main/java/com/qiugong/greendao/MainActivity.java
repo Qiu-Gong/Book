@@ -11,6 +11,7 @@ import com.qiugong.greendao.db.BaseDaoFactory;
 import com.qiugong.greendao.db.IBaseDao;
 import com.qiugong.greendao.sub_sqlite.LoginDao;
 import com.qiugong.greendao.sub_sqlite.LoginDaoFactory;
+import com.qiugong.greendao.upgrade.UpgradeManager;
 
 public class MainActivity extends Activity {
 
@@ -87,6 +88,15 @@ public class MainActivity extends Activity {
                 person.insert(new Person("QiuGong_" + cnt, 18, true));
 
                 cnt++;
+            }
+        });
+
+        findViewById(R.id.upgrade).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpgradeManager manager = new UpgradeManager();
+                manager.checkVersion(MainActivity.this);
+                manager.startUpgradeDb(MainActivity.this);
             }
         });
     }

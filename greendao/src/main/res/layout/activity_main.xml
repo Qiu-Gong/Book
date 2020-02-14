@@ -46,4 +46,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="分库插入" />
+
+    <Button
+        android:id="@+id/upgrade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="升级" />
 </LinearLayout>

@@ -2,13 +2,15 @@ package com.qiugong.greendao.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.qiugong.greendao.Constants;
+
 /**
  * @author qzx 20/2/12.
  */
 public class BaseDaoFactory implements IBaseDaoFactory {
 
     private static final IBaseDaoFactory ourInstance = new BaseDaoFactory();
-    private String databasePath;
+    private String databasePath = Constants.DATABASE_DEFAULT_PATH;
     private SQLiteDatabase sqLiteDatabase;
 
     public static IBaseDaoFactory getOurInstance() {
@@ -16,7 +18,6 @@ public class BaseDaoFactory implements IBaseDaoFactory {
     }
 
     private BaseDaoFactory() {
-        databasePath = "data/data/com.qiugong.greendao/qiu.db";
         sqLiteDatabase = SQLiteDatabase.openOrCreateDatabase(databasePath, null);
     }
 

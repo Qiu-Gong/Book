@@ -2,6 +2,7 @@ package com.qiugong.greendao.sub_sqlite;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.qiugong.greendao.Constants;
 import com.qiugong.greendao.bean.Login;
 import com.qiugong.greendao.db.BaseDao;
 import com.qiugong.greendao.db.BaseDaoFactory;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 public class LoginDaoFactory implements IBaseDaoFactory {
 
-    private final static String databasePath = "data/data/com.qiugong.greendao/";
+    private final static String databasePath = Constants.DATABASE_PATH;
 
     private static final LoginDaoFactory ourInstance = new LoginDaoFactory();
     private Map<String, IBaseDao> map = Collections.synchronizedMap(new HashMap<String, IBaseDao>());
@@ -36,7 +37,7 @@ public class LoginDaoFactory implements IBaseDaoFactory {
         Login login;
         if (list != null && list.size() == 1) {
             login = list.get(0);
-            return databasePath + login.getId() + "_login.db";
+            return databasePath + login.getId() + Constants.DATABASE_LOGIN_NAME;
         } else {
             return null;
         }

@@ -1,0 +1,51 @@
+﻿<updateXml>
+    <createVersion version="V003">
+        <createDb name="user">
+            <sql_createTable>
+                create table if not exists tb_user(
+                name TEXT,
+                password TEXT,
+                loginName TEXT,
+                lastLoginTime,
+                user_id Integer primary key);
+            </sql_createTable>
+        </createDb>
+        <createDb name="login">
+            <sql_createTable>
+                create table if not exists tb_img(
+                time TEXT,
+                imgPath TEXT,
+                to_user TEXT,
+                sendTime TEXT);
+            </sql_createTable>
+        </createDb>
+    </createVersion>
+
+    <updateStep versionFrom="V002" versionTo="V003">
+        <updateDb name="login">
+            <sql_before>alter table tb_img rename to bak_tb_img;</sql_before>
+            <sql_after>
+                insert into tb_img(time,
+                imgPath)
+                select time,imgPath
+                from bak_tb_img;
+            </sql_after>
+            <sql_after>
+                drop table if exists bak_tb_img;
+            </sql_after>
+        </updateDb>
+        <updateDb name="user">
+            <sql_before>alter table tb_user rename to bak_tb_user;</sql_before>
+            <sql_after>
+                insert into tb_user(name,
+                password)
+                select name,password
+                from bak_tb_user;
+            </sql_after>
+            <sql_after>
+                drop table if exists bak_tb_user;
+            </sql_after>
+        </updateDb>
+    </updateStep>
+</updateXml>
+
