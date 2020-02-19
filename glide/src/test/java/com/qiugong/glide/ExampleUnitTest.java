@@ -48,4 +48,58 @@ public class ExampleUnitTest {
             e.printStackTrace();
         }
     }
+
+    private class A {
+    }
+
+    private class B {
+        final A a;
+
+        public B(A a) {
+            this.a = a;
+        }
+    }
+
+    @Test
+    public void testABReference() {
+        A a = new A();
+        System.out.println("a = " + a + " -> @");
+        System.out.println("-------------------------------");
+
+        B b = new B(a);
+        System.out.println("a = " + a + " -> @");
+        System.out.println("b = " + b + " -> @");
+        System.out.println("-------------------------------");
+
+        b = null;
+        System.out.println("a = " + a + " -> @");
+        System.out.println("b = " + b + " -> null");
+        System.out.println("-------------------------------");
+
+        System.gc();
+        System.out.println("a = " + a + " -> @");
+        System.out.println("b = " + b + " -> null");
+        System.out.println("-------------------------------");
+    }
+
+    @Test
+    public void testABWeakReference() {
+        WeakReference<A> weak = new WeakReference<>(new A());
+        System.out.println("a = " + weak.get() + " -> @");
+        System.out.println("-------------------------------");
+
+        B b = new B(weak.get());
+        System.out.println("a = " + weak.get() + " -> @");
+        System.out.println("b = " + b + " -> @");
+        System.out.println("-------------------------------");
+
+        b = null;
+        System.out.println("a = " + weak.get() + " -> @");
+        System.out.println("b = " + b + " -> null");
+        System.out.println("-------------------------------");
+
+        System.gc();
+        System.out.println("a = " + weak.get() + " -> null");
+        System.out.println("b = " + b + " -> null");
+    }
 }
