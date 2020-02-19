@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion project.compileSdkVersion
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.qiugong.glide"
-        minSdkVersion project.minSdkVersion
+        minSdkVersion 17
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
         versionName project.versionName
@@ -21,6 +21,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
