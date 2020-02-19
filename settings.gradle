@@ -1,2 +1,2 @@
-include ':artisticprobes', ':advance', ':java', ':dongnao', ':eventbus', ':greendao', ':rxjava', ':okhttp'
+include ':artisticprobes', ':advance', ':java', ':dongnao', ':eventbus', ':greendao', ':rxjava', ':okhttp', ':glide'
 rootProject.name='Book'
