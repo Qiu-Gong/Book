@@ -16,6 +16,8 @@ import com.qiugong.glide.core.memory.Key;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.security.MessageDigest;
+
 /**
  * @author qzx 20/2/20.
  */
@@ -31,6 +33,10 @@ public class ActiveResourcesTest {
             bitmap = BitmapFactory.decodeResource(resources, id);
             resource = new Resource(bitmap);
             key = new Key() {
+                @Override
+                public void updateDiskCacheKey(MessageDigest messageDigest) {
+
+                }
             };
         }
 

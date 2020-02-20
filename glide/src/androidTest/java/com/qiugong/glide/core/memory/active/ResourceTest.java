@@ -13,6 +13,8 @@ import com.qiugong.glide.core.memory.Key;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.security.MessageDigest;
+
 /**
  * @author qzx 20/2/20.
  */
@@ -25,6 +27,10 @@ public class ResourceTest {
 
         Resource resource = new Resource(bitmap);
         resource.setResourceListener(new Key() {
+            @Override
+            public void updateDiskCacheKey(MessageDigest messageDigest) {
+
+            }
         }, new Resource.ResourceListener() {
             @Override
             public void onResourceReleased(Key key, Resource resource) {
