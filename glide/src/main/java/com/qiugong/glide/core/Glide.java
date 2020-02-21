@@ -6,8 +6,10 @@ import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.res.Configuration;
 
-import com.qiugong.glide.core.lifecycle.RequestManagerRetriever;
 import com.qiugong.glide.core.lifecycle.RequestManager;
+import com.qiugong.glide.core.lifecycle.RequestManagerRetriever;
+import com.qiugong.glide.core.load.Engine;
+import com.qiugong.glide.core.request.RequestOptions;
 
 /**
  * @author qzx 20/2/19.
@@ -18,10 +20,25 @@ public class Glide implements ComponentCallbacks2 {
 
     private final Context context;
     private final RequestManagerRetriever requestManagerRetriever;
+    private final RequestOptions requestOptions;
+    private final Engine engine;
 
     Glide(Context context, GlideBuilder builder) {
         this.context = context;
         this.requestManagerRetriever = builder.getRequestManagerRetriever();
+        this.requestOptions = builder.getRequestOptions();
+        this.engine = builder.getEngine();
+    }
+
+    public static Glide get(Context context) {
+        if (glide == null) {
+            synchronized (Glide.class) {
+                if (glide == null) {
+                    initializeGlide(context, new GlideBuilder());
+                }
+            }
+        }
+        return glide;
     }
 
     public static RequestManager with(Activity activity) {
@@ -48,20 +65,17 @@ public class Glide implements ComponentCallbacks2 {
         return requestManagerRetriever;
     }
 
-    private static Glide get(Context context) {
-        if (glide == null) {
-            synchronized (Glide.class) {
-                if (glide == null) {
-                    initializeGlide(context, new GlideBuilder());
-                }
-            }
-        }
-        return glide;
-    }
-
     private static void initializeGlide(Context context, GlideBuilder builder) {
         context.getApplicationContext().registerComponentCallbacks(glide);
         Glide.glide = builder.build(context);
+    }
+
+    public RequestOptions getRequestOptions() {
+        return requestOptions;
+    }
+
+    public Engine getEngine() {
+        return engine;
     }
 
     @Override
