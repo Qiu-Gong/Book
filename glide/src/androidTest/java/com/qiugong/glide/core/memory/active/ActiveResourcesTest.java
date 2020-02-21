@@ -11,7 +11,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.qiugong.glide.R;
-import com.qiugong.glide.core.memory.Key;
+import com.qiugong.glide.core.key.Key;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +36,11 @@ public class ActiveResourcesTest {
                 @Override
                 public void updateDiskCacheKey(MessageDigest messageDigest) {
 
+                }
+
+                @Override
+                public byte[] getKeyBytes() {
+                    return new byte[0];
                 }
             };
         }

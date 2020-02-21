@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.qiugong.glide.core.Utils;
-import com.qiugong.glide.core.memory.Key;
+import com.qiugong.glide.core.key.Key;
 
 import java.io.File;
 import java.io.IOException;

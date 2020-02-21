@@ -1,4 +1,4 @@
-package com.qiugong.glide.core.memory;
+package com.qiugong.glide.core.key;
 
 import androidx.annotation.Nullable;
 

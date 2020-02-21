@@ -3,7 +3,7 @@ package com.qiugong.glide.core.memory.active;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.qiugong.glide.core.memory.Key;
+import com.qiugong.glide.core.key.Key;
 
 /**
  * @author qzx 20/2/20.

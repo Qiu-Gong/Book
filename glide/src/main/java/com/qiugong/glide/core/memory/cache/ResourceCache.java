@@ -1,6 +1,6 @@
 package com.qiugong.glide.core.memory.cache;
 
-import com.qiugong.glide.core.memory.Key;
+import com.qiugong.glide.core.key.Key;
 import com.qiugong.glide.core.memory.active.Resource;
 
 /**

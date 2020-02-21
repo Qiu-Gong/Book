@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.util.LruCache;
 
-import com.qiugong.glide.core.memory.Key;
+import com.qiugong.glide.core.key.Key;
 import com.qiugong.glide.core.memory.active.Resource;
 
 /**

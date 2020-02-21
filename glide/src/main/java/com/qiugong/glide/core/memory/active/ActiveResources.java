@@ -2,7 +2,7 @@ package com.qiugong.glide.core.memory.active;
 
 import android.util.Log;
 
-import com.qiugong.glide.core.memory.Key;
+import com.qiugong.glide.core.key.Key;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
