@@ -18,7 +18,7 @@ public class LruResourceCache implements ResourceCache {
     private ResourceRemovedListener resourceRemovedListener;
     private boolean isSelfRemove;
 
-    private LruResourceCache(int maxSize) {
+    public LruResourceCache(int maxSize) {
         this.maxSize = maxSize;
         this.cache = new LruCache<Key, Resource>(maxSize) {
             @Override
@@ -52,6 +52,11 @@ public class LruResourceCache implements ResourceCache {
     @Override
     public Resource put(Key key, Resource resource) {
         return cache.put(key, resource);
+    }
+
+    @Override
+    public int getMaxSize() {
+        return maxSize;
     }
 
     @Override

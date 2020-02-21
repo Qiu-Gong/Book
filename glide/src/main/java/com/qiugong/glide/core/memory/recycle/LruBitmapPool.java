@@ -17,7 +17,7 @@ public class LruBitmapPool implements BitmapPool {
     private final int maxSize;
     private final LruCache<Key, Bitmap> cache;
 
-    private LruBitmapPool(int maxSize) {
+    public LruBitmapPool(int maxSize) {
         this.maxSize = maxSize;
         this.cache = new LruCache<Key, Bitmap>(maxSize) {
             @Override
@@ -58,6 +58,11 @@ public class LruBitmapPool implements BitmapPool {
         Bitmap value = cache.remove(key);
         Log.d(TAG, "get: bitmap=" + value);
         return value;
+    }
+
+    @Override
+    public int getMaxSize() {
+        return maxSize;
     }
 
     @Override

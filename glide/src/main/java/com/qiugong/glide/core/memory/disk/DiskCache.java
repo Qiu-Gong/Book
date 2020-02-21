@@ -17,6 +17,8 @@ public interface DiskCache {
 
     void put(Key key, Writer writer);
 
+    long getMaxSize();
+
     void delete(Key key);
 
     void clear();

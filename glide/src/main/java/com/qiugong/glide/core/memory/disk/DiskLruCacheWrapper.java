@@ -94,4 +94,9 @@ public class DiskLruCacheWrapper implements DiskCache {
         key.updateDiskCacheKey(messageDigest);
         return Utils.sha256BytesToHex(messageDigest.digest());
     }
+
+    @Override
+    public long getMaxSize() {
+        return diskLruCache.getMaxSize();
+    }
 }

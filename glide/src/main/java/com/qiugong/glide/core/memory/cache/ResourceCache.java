@@ -18,6 +18,8 @@ public interface ResourceCache {
 
     Resource put(Key key, Resource resource);
 
+    int getMaxSize();
+
     void clearMemory();
 
     void trimMemory(int level);
