@@ -148,7 +148,8 @@ public class DecodeJob implements Runnable, DataGeneratorListener {
     }
 
     private <Data> void runLoadPath(Data data, DataSource dataSource) {
-        LoadPath<Data> loadPath = Glide.get(context).getRegistry().getLoadPath(data.getClass());
+        LoadPath<Data> loadPath = Glide.get(context).getRegistry()
+                .getLoadPath((Class<Data>) data.getClass());
         Bitmap bitmap = loadPath.runLoad(data, width, height);
         if (bitmap != null) {
             Log.d(TAG, "runLoadPath: 解码成功回调");

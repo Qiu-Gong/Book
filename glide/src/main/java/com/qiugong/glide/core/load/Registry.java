@@ -5,7 +5,7 @@ import com.qiugong.glide.core.load.codec.LoadPath;
 import com.qiugong.glide.core.load.codec.ResourceDecoder;
 import com.qiugong.glide.core.load.model.ModelLoader;
 import com.qiugong.glide.core.load.model.ModelLoaderRegistry;
-import com.qiugong.glide.core.load.model.ResourceDecoderRegistry;
+import com.qiugong.glide.core.load.codec.ResourceDecoderRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,9 +70,9 @@ public class Registry {
         return keys;
     }
 
-    <Data> LoadPath<Data> getLoadPath(Class<?> cls) {
-        List<ResourceDecoder<Data>> decoders = resourceDecoderRegistry.getDecoders(cls);
-        return new LoadPath<>(cls, decoders);
+    <Data> LoadPath<Data> getLoadPath(Class<Data> dataClass) {
+        List<ResourceDecoder<Data>> decoders = resourceDecoderRegistry.getDecoders(dataClass);
+        return new LoadPath<>(decoders);
     }
 
     public boolean hasLoadPath(Class<?> dataClass) {
