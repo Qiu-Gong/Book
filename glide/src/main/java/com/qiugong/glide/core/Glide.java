@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import com.qiugong.glide.core.lifecycle.RequestManager;
 import com.qiugong.glide.core.lifecycle.RequestManagerRetriever;
 import com.qiugong.glide.core.load.Engine;
+import com.qiugong.glide.core.load.Registry;
 import com.qiugong.glide.core.memory.cache.ResourceCache;
 import com.qiugong.glide.core.memory.disk.DiskCache;
 import com.qiugong.glide.core.memory.recycle.ArrayPool;
@@ -24,11 +25,11 @@ public class Glide implements ComponentCallbacks2 {
 
     private static volatile Glide glide;
 
-    private final Context context;
     private final RequestManagerRetriever requestManagerRetriever;
     private final RequestOptions requestOptions;
     private final Engine engine;
     private Executor executor;
+    private Registry registry;
 
     private ArrayPool arrayPool;
     private BitmapPool bitmapPool;
@@ -36,7 +37,6 @@ public class Glide implements ComponentCallbacks2 {
     private ResourceCache memoryCache;
 
     Glide(Context context, GlideBuilder builder) {
-        this.context = context;
         this.requestManagerRetriever = builder.getRequestManagerRetriever();
         this.requestOptions = builder.getRequestOptions();
         this.engine = builder.getEngine();
@@ -97,6 +97,10 @@ public class Glide implements ComponentCallbacks2 {
 
     public Executor getExecutor() {
         return executor;
+    }
+
+    public Registry getRegistry() {
+        return registry;
     }
 
     public ArrayPool getArrayPool() {

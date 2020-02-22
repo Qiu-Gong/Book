@@ -83,7 +83,7 @@ public class Engine implements
         Log.d(TAG, "load: 新建任务");
         engineJob = new EngineJob(context, engineKey, this);
         engineJob.addCallback(callback);
-        DecodeJob decodeJob = new DecodeJob(context, model, engineKey, width, height, engineJob);
+        DecodeJob decodeJob = new DecodeJob(context, model, width, height, engineJob);
         engineJob.start(decodeJob);
         engineJobs.put(engineKey, engineJob);
         return new LoadStatus(engineJob, callback);
