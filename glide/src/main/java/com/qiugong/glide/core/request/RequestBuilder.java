@@ -24,7 +24,7 @@ public class RequestBuilder implements ModelTypes {
         this.requestOptions = Glide.get(context).getRequestOptions();
     }
 
-    private RequestBuilder apply(RequestOptions options) {
+    public RequestBuilder apply(RequestOptions options) {
         this.requestOptions = options;
         return this;
     }
