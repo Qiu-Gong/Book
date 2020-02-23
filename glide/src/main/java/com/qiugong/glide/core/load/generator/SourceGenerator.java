@@ -3,8 +3,8 @@ package com.qiugong.glide.core.load.generator;
 import android.util.Log;
 
 import com.qiugong.glide.core.Glide;
-import com.qiugong.glide.core.load.model.ModelLoader;
 import com.qiugong.glide.core.load.model.data.DataFetcher;
+import com.qiugong.glide.core.load.model.data.LoadData;
 
 import java.util.List;
 
@@ -22,8 +22,8 @@ public class SourceGenerator implements DataGenerator,
     private final DataGeneratorListener dataGeneratorListener;
 
     private int loadDataListIndex;
-    private List<ModelLoader.LoadData<?>> loadDataList;
-    private ModelLoader.LoadData<?> loadData;
+    private List<LoadData<?>> loadDataList;
+    private LoadData<?> loadData;
 
     public SourceGenerator(Glide glide, Object model, DataGeneratorListener listener) {
         this.glide = glide;

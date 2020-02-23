@@ -4,8 +4,9 @@ import android.util.Log;
 
 import com.qiugong.glide.core.Glide;
 import com.qiugong.glide.core.key.Key;
-import com.qiugong.glide.core.load.model.ModelLoader;
+import com.qiugong.glide.core.load.model.loader.ModelLoader;
 import com.qiugong.glide.core.load.model.data.DataFetcher;
+import com.qiugong.glide.core.load.model.data.LoadData;
 
 import java.io.File;
 import java.util.List;
@@ -28,7 +29,7 @@ public class DataCacheGenerator implements DataGenerator,
     private int sourceIdIndex = -1;
 
     private List<ModelLoader<File, ?>> modelLoaders;
-    private ModelLoader.LoadData<?> loadData;
+    private LoadData<?> loadData;
     private File cacheFile;
     private int modelLoaderIndex;
 

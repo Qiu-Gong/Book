@@ -3,9 +3,10 @@ package com.qiugong.glide.core.load;
 import com.qiugong.glide.core.key.Key;
 import com.qiugong.glide.core.load.codec.LoadPath;
 import com.qiugong.glide.core.load.codec.ResourceDecoder;
-import com.qiugong.glide.core.load.model.ModelLoader;
+import com.qiugong.glide.core.load.model.loader.ModelLoader;
 import com.qiugong.glide.core.load.model.ModelLoaderRegistry;
 import com.qiugong.glide.core.load.codec.ResourceDecoderRegistry;
+import com.qiugong.glide.core.load.model.data.LoadData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,11 +50,11 @@ public class Registry {
     /**
      * 获取
      */
-    public List<ModelLoader.LoadData<?>> getLoadData(Object model) {
-        List<ModelLoader.LoadData<?>> loadData = new ArrayList<>();
+    public List<LoadData<?>> getLoadData(Object model) {
+        List<LoadData<?>> loadData = new ArrayList<>();
         List<ModelLoader<Object, ?>> modelLoaders = getModeLoaders(model);
         for (ModelLoader<Object, ?> modelLoader : modelLoaders) {
-            ModelLoader.LoadData<?> current = modelLoader.buildLoadData(model);
+            LoadData<?> current = modelLoader.buildLoadData(model);
             if (current != null) {
                 loadData.add(current);
             }
@@ -63,8 +64,8 @@ public class Registry {
 
     public List<Key> getKeys(Object model) {
         List<Key> keys = new ArrayList<>();
-        List<ModelLoader.LoadData<?>> loadDataList = getLoadData(model);
-        for (ModelLoader.LoadData<?> loadData : loadDataList) {
+        List<LoadData<?>> loadDataList = getLoadData(model);
+        for (LoadData<?> loadData : loadDataList) {
             keys.add(loadData.sourceKey);
         }
         return keys;
