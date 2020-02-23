@@ -17,10 +17,9 @@ public class ModelLoaderRegistry {
         private final Class<Data> dataClass;
         final ModelLoader.ModelLoaderFactory<? extends Model, ? extends Data> factory;
 
-        Entry(
-                Class<Model> modelClass,
-                Class<Data> dataClass,
-                ModelLoader.ModelLoaderFactory<? extends Model, ? extends Data> factory) {
+        Entry(Class<Model> modelClass,
+              Class<Data> dataClass,
+              ModelLoader.ModelLoaderFactory<? extends Model, ? extends Data> factory) {
             this.modelClass = modelClass;
             this.dataClass = dataClass;
             this.factory = factory;

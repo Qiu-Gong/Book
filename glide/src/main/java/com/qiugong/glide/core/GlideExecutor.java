@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author qzx 20/2/21.
  */
-public class GlideExecutor {
+class GlideExecutor {
 
     private static int bestThreadCount;
 
@@ -28,7 +28,7 @@ public class GlideExecutor {
         }
     }
 
-    public static ThreadPoolExecutor newExecutor() {
+    static ThreadPoolExecutor newExecutor() {
         int threadCount = calculateBestThreadCount();
         return new ThreadPoolExecutor(
                 threadCount, threadCount,

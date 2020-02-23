@@ -52,7 +52,7 @@ public class ActiveResources {
         return null;
     }
 
-    public void shutDown() {
+    void shutDown() {
         Log.d(TAG, "shutDown");
         threadShutDown = true;
         if (cleanReferenceQueueThread == null) {
@@ -96,8 +96,8 @@ public class ActiveResources {
 
         private Key key;
 
-        public ResourceWeakReference(Key key, Resource resource,
-                                     ReferenceQueue<? super Resource> queue) {
+        ResourceWeakReference(Key key, Resource resource,
+                              ReferenceQueue<? super Resource> queue) {
             super(resource, queue);
         }
     }

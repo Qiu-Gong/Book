@@ -21,7 +21,7 @@ public class MarkInputStream extends InputStream {
     private int readCount;
     private byte[] buffer;
 
-    public MarkInputStream(InputStream inputStream, ArrayPool arrayPool) {
+    MarkInputStream(InputStream inputStream, ArrayPool arrayPool) {
         this.inputStream = inputStream;
         this.arrayPool = arrayPool;
         buffer = arrayPool.get(BUFFER_SIZE_BYTES);

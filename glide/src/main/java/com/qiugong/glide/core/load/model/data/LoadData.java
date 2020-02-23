@@ -10,7 +10,7 @@ public class LoadData<Data> {
     public final Key sourceKey;
     public final DataFetcher<Data> fetcher;
 
-    LoadData(Key sourceKey, DataFetcher<Data> fetcher) {
+    public LoadData(Key sourceKey, DataFetcher<Data> fetcher) {
         this.sourceKey = sourceKey;
         this.fetcher = fetcher;
     }

@@ -27,7 +27,7 @@ public class DiskLruCacheWrapper implements DiskCache {
         this(new File(context.getCacheDir(), DEFAULT_DISK_CACHE_DIR), DEFAULT_DISK_CACHE_SIZE);
     }
 
-    public DiskLruCacheWrapper(File dir, long maxSize) {
+    private DiskLruCacheWrapper(File dir, long maxSize) {
         try {
             messageDigest = MessageDigest.getInstance("SHA-256");
             diskLruCache = DiskLruCache.open(dir, 1, 1, maxSize);

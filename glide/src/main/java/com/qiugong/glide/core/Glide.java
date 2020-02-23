@@ -5,17 +5,25 @@ import android.app.Fragment;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.net.Uri;
 
 import com.qiugong.glide.core.lifecycle.RequestManager;
 import com.qiugong.glide.core.lifecycle.RequestManagerRetriever;
 import com.qiugong.glide.core.load.Engine;
 import com.qiugong.glide.core.load.Registry;
+import com.qiugong.glide.core.load.codec.StreamBitmapDecoder;
+import com.qiugong.glide.core.load.model.loader.FileLoader;
+import com.qiugong.glide.core.load.model.loader.HttpUriLoader;
+import com.qiugong.glide.core.load.model.loader.StringLoader;
+import com.qiugong.glide.core.load.model.loader.UriFileLoader;
 import com.qiugong.glide.core.memory.cache.ResourceCache;
 import com.qiugong.glide.core.memory.disk.DiskCache;
 import com.qiugong.glide.core.memory.recycle.ArrayPool;
 import com.qiugong.glide.core.memory.recycle.BitmapPool;
 import com.qiugong.glide.core.request.RequestOptions;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.concurrent.Executor;
 
 /**
@@ -45,6 +53,13 @@ public class Glide implements ComponentCallbacks2 {
         this.bitmapPool = builder.getBitmapPool();
         this.diskCache = builder.getDiskCache();
         this.memoryCache = builder.getMemoryCache();
+
+        registry = new Registry();
+        registry.add(String.class, InputStream.class, new StringLoader.Factory())
+                .add(Uri.class, InputStream.class, new HttpUriLoader.Factory())
+                .add(Uri.class, InputStream.class, new UriFileLoader.Factory(context.getContentResolver()))
+                .add(File.class, InputStream.class, new FileLoader.Factory())
+                .register(InputStream.class, new StreamBitmapDecoder(bitmapPool, arrayPool));
     }
 
     public static Glide get(Context context) {
@@ -121,13 +136,19 @@ public class Glide implements ComponentCallbacks2 {
 
     @Override
     public void onTrimMemory(int level) {
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+        memoryCache.trimMemory(level);
+        bitmapPool.trimMemory(level);
+        arrayPool.trimMemory(level);
     }
 
     @Override
     public void onLowMemory() {
+        memoryCache.clearMemory();
+        bitmapPool.clearMemory();
+        arrayPool.clearMemory();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
     }
 }

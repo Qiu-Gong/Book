@@ -20,7 +20,7 @@ public class RequestManager implements LifecycleListener, ModelTypes {
     private Lifecycle lifecycle;
     private RequestTracker requestTracker;
 
-    public RequestManager(Context context, Lifecycle lifecycle) {
+    RequestManager(Context context, Lifecycle lifecycle) {
         this.context = context;
         this.lifecycle = lifecycle;
         this.requestTracker = new RequestTracker();

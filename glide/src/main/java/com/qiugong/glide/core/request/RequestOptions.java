@@ -26,19 +26,19 @@ public class RequestOptions {
         return this;
     }
 
-    public int getErrorId() {
+    int getErrorId() {
         return errorId;
     }
 
-    public int getPlaceholderId() {
+    int getPlaceholderId() {
         return placeholderId;
     }
 
-    public int getOverrideHeight() {
+    int getOverrideHeight() {
         return overrideHeight;
     }
 
-    public int getOverrideWidth() {
+    int getOverrideWidth() {
         return overrideWidth;
     }
 }

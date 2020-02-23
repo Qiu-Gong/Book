@@ -49,7 +49,7 @@ public class Target {
         }
     }
 
-    public Target(ImageView view) {
+    Target(ImageView view) {
         this.view = view;
     }
 

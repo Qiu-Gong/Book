@@ -109,23 +109,23 @@ class GlideBuilder {
         return engine;
     }
 
-    public Executor getExecutor() {
+    Executor getExecutor() {
         return executor;
     }
 
-    public ArrayPool getArrayPool() {
+    ArrayPool getArrayPool() {
         return arrayPool;
     }
 
-    public BitmapPool getBitmapPool() {
+    BitmapPool getBitmapPool() {
         return bitmapPool;
     }
 
-    public DiskCache getDiskCache() {
+    DiskCache getDiskCache() {
         return diskCache;
     }
 
-    public ResourceCache getMemoryCache() {
+    ResourceCache getMemoryCache() {
         return memoryCache;
     }
 

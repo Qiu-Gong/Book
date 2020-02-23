@@ -48,7 +48,7 @@ public class Request implements ResourceCallback, Target.SizeReadyCallback {
     private Drawable placeHolderDrawable;
     private Engine.LoadStatus loadStatus;
 
-    public Request(Context context, Object model, RequestOptions requestOptions, Target target) {
+    Request(Context context, Object model, RequestOptions requestOptions, Target target) {
         this.context = context;
         this.model = model;
         this.requestOptions = requestOptions;
