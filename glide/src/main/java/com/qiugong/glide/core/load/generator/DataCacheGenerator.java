@@ -19,7 +19,7 @@ import java.util.List;
 public class DataCacheGenerator implements DataGenerator,
         DataFetcher.DataFetcherListener<Object> {
 
-    private static final String TAG = "SourceGenerator";
+    private static final String TAG = "DataCacheGenerator";
 
     private final Glide glide;
     private final DataGeneratorListener dataGeneratorListener;

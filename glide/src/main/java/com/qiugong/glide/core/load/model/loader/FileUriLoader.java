@@ -5,7 +5,7 @@ import android.net.Uri;
 
 import com.qiugong.glide.core.key.ObjectKey;
 import com.qiugong.glide.core.load.model.ModelLoaderRegistry;
-import com.qiugong.glide.core.load.model.data.FileFetcher;
+import com.qiugong.glide.core.load.model.data.FileUriFetcher;
 import com.qiugong.glide.core.load.model.data.LoadData;
 
 import java.io.InputStream;
@@ -13,17 +13,17 @@ import java.io.InputStream;
 /**
  * @author qzx 20/2/23.
  */
-public class UriFileLoader implements ModelLoader<Uri, InputStream> {
+public class FileUriLoader implements ModelLoader<Uri, InputStream> {
 
     private final ContentResolver contentResolver;
 
-    private UriFileLoader(ContentResolver contentResolver) {
+    private FileUriLoader(ContentResolver contentResolver) {
         this.contentResolver = contentResolver;
     }
 
     @Override
     public LoadData<InputStream> buildLoadData(Uri uri) {
-        return new LoadData<>(new ObjectKey(uri), new FileFetcher(uri, contentResolver));
+        return new LoadData<>(new ObjectKey(uri), new FileUriFetcher(uri, contentResolver));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UriFileLoader implements ModelLoader<Uri, InputStream> {
 
         @Override
         public ModelLoader<Uri, InputStream> build(ModelLoaderRegistry registry) {
-            return new UriFileLoader(contentResolver);
+            return new FileUriLoader(contentResolver);
         }
 
     }

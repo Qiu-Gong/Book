@@ -115,6 +115,7 @@ public class DecodeJob implements Runnable, DataGeneratorListener {
             stage = getNextStage(stage);
             if (stage == Stage.FINISHED) {
                 Log.d(TAG, "runGenerators: 状态结束,没有加载器能够加载对应数据");
+                break;
             }
             currentGenerator = getNextGenerator(stage);
         }

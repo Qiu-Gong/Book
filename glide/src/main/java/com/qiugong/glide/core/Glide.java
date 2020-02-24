@@ -15,7 +15,7 @@ import com.qiugong.glide.core.load.codec.StreamBitmapDecoder;
 import com.qiugong.glide.core.load.model.loader.FileLoader;
 import com.qiugong.glide.core.load.model.loader.HttpUriLoader;
 import com.qiugong.glide.core.load.model.loader.StringLoader;
-import com.qiugong.glide.core.load.model.loader.UriFileLoader;
+import com.qiugong.glide.core.load.model.loader.FileUriLoader;
 import com.qiugong.glide.core.memory.cache.ResourceCache;
 import com.qiugong.glide.core.memory.disk.DiskCache;
 import com.qiugong.glide.core.memory.recycle.ArrayPool;
@@ -57,7 +57,7 @@ public class Glide implements ComponentCallbacks2 {
         registry = new Registry();
         registry.add(String.class, InputStream.class, new StringLoader.Factory())
                 .add(Uri.class, InputStream.class, new HttpUriLoader.Factory())
-                .add(Uri.class, InputStream.class, new UriFileLoader.Factory(context.getContentResolver()))
+                .add(Uri.class, InputStream.class, new FileUriLoader.Factory(context.getContentResolver()))
                 .add(File.class, InputStream.class, new FileLoader.Factory())
                 .register(InputStream.class, new StreamBitmapDecoder(bitmapPool, arrayPool));
     }

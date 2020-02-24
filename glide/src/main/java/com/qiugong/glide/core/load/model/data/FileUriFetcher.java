@@ -8,12 +8,12 @@ import java.io.InputStream;
 /**
  * @author qzx 20/2/23.
  */
-public class FileFetcher implements DataFetcher<InputStream> {
+public class FileUriFetcher implements DataFetcher<InputStream> {
 
     private final ContentResolver contentResolver;
     private final Uri uri;
 
-    public FileFetcher(Uri uri, ContentResolver contentResolver) {
+    public FileUriFetcher(Uri uri, ContentResolver contentResolver) {
         this.uri = uri;
         this.contentResolver = contentResolver;
     }

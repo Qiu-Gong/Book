@@ -45,7 +45,7 @@ public class SourceGenerator implements DataGenerator,
                 loadData.fetcher.loadData(this);
             }
         }
-        return false;
+        return started;
     }
 
     @Override

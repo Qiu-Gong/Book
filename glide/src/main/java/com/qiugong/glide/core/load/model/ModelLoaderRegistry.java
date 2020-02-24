@@ -62,7 +62,7 @@ public class ModelLoaderRegistry {
                 dataClass.getName() + " Data");
     }
 
-    public <Model> List<ModelLoader<Model, ?>> getModeLoaders(Class<Model> modelClass) {
+    public <Model> List<ModelLoader<Model, ?>> getModelLoaders(Class<Model> modelClass) {
         List<ModelLoader<Model, ?>> modelLoaders = new ArrayList<>();
         for (Entry<?, ?> entry : entries) {
             if (entry.handles(modelClass)) {

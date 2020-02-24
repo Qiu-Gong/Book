@@ -44,7 +44,7 @@ public class Registry {
      */
     public <Model> List<ModelLoader<Model, ?>> getModeLoaders(Model model) {
         Class<Model> modelClass = (Class<Model>) model.getClass();
-        return modelLoaderRegistry.getModeLoaders(modelClass);
+        return modelLoaderRegistry.getModelLoaders(modelClass);
     }
 
     /**
