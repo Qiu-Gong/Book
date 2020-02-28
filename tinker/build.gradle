@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion project.compileSdkVersion
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.qiugong.tinker"
@@ -9,7 +9,25 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
         versionName project.versionName
+
+        // 开启分包
+        multiDexEnabled true
+        // 设置分包配置文件
+        multiDexKeepFile file('multidex.keep')
     }
+
+    // TODO 是否要增加还不明确
+//    dexOptions {
+//        javaMaxHeapSize "4g"
+//        preDexLibraries = false
+//        additionalParameters = [ // 多dex分包
+//                                 '--multi-dex',
+//                                 // 每个包内方法数上限
+//                                 '--set-max-idx-number=50000',
+//                                 // 打包到主classes.dex的文件列表
+//                                 '--main-dex-list=' + '/multidex.keep',
+//                                 '--minimal-main-dex']
+//    }
 
     buildTypes {
         release {
