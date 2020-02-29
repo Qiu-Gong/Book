@@ -1,0 +1,23 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion project.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.qiugong.encryptapp"
+        minSdkVersion project.minSdkVersion
+        targetSdkVersion project.targetSdkVersion
+        versionCode project.versionCode
+        versionName project.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
