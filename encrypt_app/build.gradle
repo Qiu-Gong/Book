@@ -9,6 +9,9 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
         versionName project.versionName
+
+        multiDexEnabled true
+        multiDexKeepFile file('multidex.keep')
     }
 
     buildTypes {
@@ -19,5 +22,5 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':encrypt_core')
 }
