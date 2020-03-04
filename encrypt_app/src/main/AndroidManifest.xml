@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qiugong.encryptapp">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <application
         android:name="com.qiugong.encryptcore.ProxyApplication"
         android:allowBackup="true"
@@ -17,12 +14,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity" />
+
+        <!-- service -->
+        <service android:name=".MyService" />
+        <!-- provider -->
+        <provider
+            android:name=".MyProvider"
+            android:authorities="com.qiugong.encryptapp.MyProvider" />
+        <!-- receiver -->
+        <receiver
+            android:name=".MyBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.qiugong.encryptapp.test" />
+            </intent-filter>
+        </receiver>
 
         <!--真实的Application的全名-->
-        <meta-data android:name="app_name" android:value="com.qiugong.encryptapp.MyApplication"/>
+        <meta-data
+            android:name="app_name"
+            android:value="com.qiugong.encryptapp.MyApplication" />
         <!--用于dex后的目录名_版本号-->
-        <meta-data android:name="app_version" android:value="\dexDir_1.0"/>
+        <meta-data
+            android:name="app_version"
+            android:value="\dexDir_1.0" />
     </application>
 
 </manifest>

@@ -6,14 +6,21 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/service"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Main Activity" />
+        android:text="service" />
 
     <Button
-        android:id="@+id/btn"
+        android:id="@+id/broadcast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="跳转到SecondActivity" />
+        android:text="broadcast" />
+
+    <Button
+        android:id="@+id/provider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="provider" />
 </LinearLayout>

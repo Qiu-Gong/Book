@@ -1,30 +1,46 @@
 package com.qiugong.encryptapp;
 
-import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends Activity {
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            if (checkSelfPermission(perms[0]) == PackageManager.PERMISSION_DENIED) {
-                requestPermissions(perms, 200);
-            }
-        }
+        Log.i(TAG, "activity:" + getApplication());
+        Log.i(TAG, "activity:" + getApplicationContext());
+        Log.i(TAG, "activity:" + getApplicationInfo().className);
 
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                startService(new Intent(MainActivity.this, MyService.class));
+            }
+        });
+
+        findViewById(R.id.broadcast).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("com.qiugong.encryptapp.test");
+                intent.setPackage(getPackageName());
+                MainActivity.this.sendBroadcast(intent);
+            }
+        });
+
+        findViewById(R.id.provider).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("content://com.qiugong.encryptapp.MyProvider");
+                MainActivity.this.getContentResolver().delete(uri, null, null);
             }
         });
     }
