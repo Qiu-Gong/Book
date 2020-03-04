@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    // 26 版本可以跑过，21 不行
     compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
@@ -9,9 +10,6 @@ android {
         targetSdkVersion project.targetSdkVersion
         versionCode project.versionCode
         versionName project.versionName
-
-        multiDexEnabled true
-        multiDexKeepFile file('multidex.keep')
     }
 
     buildTypes {

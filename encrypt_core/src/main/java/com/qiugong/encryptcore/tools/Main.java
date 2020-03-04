@@ -24,13 +24,23 @@ public class Main {
     private static final String KEY_PASS = "123456";
 
     public static void main(String[] args) throws Exception {
+        System.out.println("开始打包 ...");
 
         // 1.制作只包含解密代码的dex文件
         File aarFile = new File(CORE_AAR_FILE_DIR);
         File aarTemp = new File(CORE_AAR_TEMP_DIR);
+        if (!aarFile.exists()) {
+            System.out.println("aar file not exist. " + aarFile.getPath());
+            return;
+        }
+
         Zip.unZip(aarFile, aarTemp);
         File classesJar = new File(aarTemp, "classes.jar");
         File classesDex = new File(aarTemp, "classes.dex");
+        if (!classesJar.exists()) {
+            System.out.println("classes Jar not exist. " + classesJar.getPath());
+            return;
+        }
 
         // dx --dex --output out.dex in.jar
         Process process = Runtime
@@ -41,6 +51,9 @@ public class Main {
         process.waitFor();
         if (process.exitValue() != 0) {
             throw new RuntimeException("dex error");
+        }
+        if (classesDex.exists()) {
+            System.out.println("创建 classes.dex 成功. " + classesDex.getPath());
         }
 
         // 2.加密APK中所有的dex文件
@@ -57,9 +70,11 @@ public class Main {
         AES aes = new AES();
         aes.init(AES.DEFAULT_PWD);
         for (File dexFile : dexFiles) {
+            File secretFile = new File(apkTemp, "secret-" + dexFile.getName());
+            System.out.println("encrypt dex:" + secretFile.getPath());
             byte[] bytes = Utils.getBytes(dexFile);
             byte[] encrypt = aes.encrypt(bytes);
-            FileOutputStream fos = new FileOutputStream(new File(apkTemp, "secret-" + dexFile.getName()));
+            FileOutputStream fos = new FileOutputStream(secretFile);
             fos.write(encrypt);
             fos.flush();
             fos.close();
@@ -70,6 +85,7 @@ public class Main {
         classesDex.renameTo(new File(apkTemp, "classes.dex"));
         File unSignedApk = new File(APP_FILE_DIR + "app-unsigned.apk");
         Zip.zip(apkTemp, unSignedApk);
+        System.out.println("重新压成 unSignedApk");
 
         // 4.对齐和签名
         // zipalign -v -p 4 my-app-unsigned.apk my-app-unsigned-aligned.apk
@@ -78,6 +94,7 @@ public class Main {
                 + SPACE + unSignedApk.getAbsolutePath()
                 + SPACE + alignedApk.getAbsolutePath());
         process.waitFor();
+        System.out.println("对齐 unsigned-aligned.apk");
 
         // apksigner sign  --ks jks文件地址 --ks-key-alias 别名 --ks-pass pass:jsk密码 --key-pass pass:别名密码 --out  out.apk in.apk
         File signedApk = new File(APP_FILE_DIR + "app-signed-aligned.apk");
@@ -89,6 +106,8 @@ public class Main {
         if (process.exitValue() != 0) {
             throw new RuntimeException("dex error");
         }
-        System.out.println("执行成功");
+        System.out.println("签名 app-signed-aligned.apk");
+
+        System.out.println("打包结束 -> " + signedApk.getPath());
     }
 }

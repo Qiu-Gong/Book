@@ -1,12 +1,6 @@
 package com.qiugong.encryptcore.tools;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -24,15 +18,10 @@ public class AES {
         try {
             encryptCipher = Cipher.getInstance(algorithmStr);
             decryptCipher = Cipher.getInstance(algorithmStr);
-            byte[] keyStr = pwd.getBytes();
-            SecretKeySpec key = new SecretKeySpec(keyStr, "AES");
+            SecretKeySpec key = new SecretKeySpec(pwd.getBytes(), "AES");
             encryptCipher.init(Cipher.ENCRYPT_MODE, key);
             decryptCipher.init(Cipher.DECRYPT_MODE, key);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -40,9 +29,7 @@ public class AES {
     byte[] encrypt(byte[] content) {
         try {
             return encryptCipher.doFinal(content);
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
@@ -51,9 +38,7 @@ public class AES {
     public byte[] decrypt(byte[] content) {
         try {
             return decryptCipher.doFinal(content);
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
