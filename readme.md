@@ -11,6 +11,7 @@
 - videoCache 源码分析
 - retrofit 简单使用
 - thinker 实现代码修复
+- encrypt_app / encrypt_core app加固
 
 可以通过 EditConfig 来配置指定 Activity，这样就能任意打开想要的 Activity 界面。
 

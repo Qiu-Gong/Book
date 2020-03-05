@@ -33,6 +33,9 @@ public class ProxyApplication extends Application {
     private String app_name;
     private String app_version;
 
+    private Application delegate;
+    private boolean isBindReal;
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -95,6 +98,39 @@ public class ProxyApplication extends Application {
         }
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.d(TAG, "onCreate: ");
+        try {
+            bindRealApplication();
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    @Override
+    public String getPackageName() {
+        if (!TextUtils.isEmpty(app_name)) {
+            return "";
+        }
+        return super.getPackageName();
+    }
+
+    @Override
+    public Context createPackageContext(String packageName, int flags) throws PackageManager.NameNotFoundException {
+        Log.d(TAG, "createPackageContext: ");
+        if (TextUtils.isEmpty(app_name)) {
+            return super.createPackageContext(packageName, flags);
+        }
+        try {
+            bindRealApplication();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return delegate;
+    }
+
     private void loadDex(List<File> dexFiles, File versionDir) throws Exception {
         // 1.获取 DexClassLoader.pathList
         Field pathListField = Utils.findField(getClassLoader(), "pathList");
@@ -139,5 +175,66 @@ public class ProxyApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void bindRealApplication() throws Exception {
+        if (TextUtils.isEmpty(app_name) || isBindReal) {
+            return;
+        }
+
+        // 1. Application.attach(Context)
+        // 创建 MyApplication
+        Class<?> delegateClass = Class.forName(app_name);
+        delegate = (Application) delegateClass.newInstance();
+        // 得到 attachBaseContext(context) 传入的上下文 ContextImpl
+        Context baseContext = getBaseContext();
+        Method attach = Application.class.getDeclaredMethod("attach", Context.class);
+        attach.setAccessible(true);
+        attach.invoke(delegate, baseContext);
+
+        // 2. appContext.setOuterContext(app);
+        Class<?> contextImplClass = Class.forName("android.app.ContextImpl");
+        Field mOuterContextField = contextImplClass.getDeclaredField("mOuterContext");
+        mOuterContextField.setAccessible(true);
+        mOuterContextField.set(baseContext, delegate);
+
+        // 3. mActivityThread.mAllApplications.add(app);
+        // ContextImpl.mMainThread
+        Field mMainThreadField = contextImplClass.getDeclaredField("mMainThread");
+        mMainThreadField.setAccessible(true);
+        Object mMainThread = mMainThreadField.get(baseContext);
+        // ActivityThread.mInitialApplication
+        Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+        Field mAllApplicationsField = activityThreadClass.getDeclaredField("mAllApplications");
+        mAllApplicationsField.setAccessible(true);
+        // ArrayList<Application>.add
+        ArrayList<Application> mAllApplications = (ArrayList<Application>) mAllApplicationsField.get(mMainThread);
+        mAllApplications.remove(this);
+        mAllApplications.add(delegate);
+
+        // 4.mApplication = app
+        // ContextImpl.mPackageInfo
+        Field mPackageInfoField = contextImplClass.getDeclaredField("mPackageInfo");
+        mPackageInfoField.setAccessible(true);
+        Object mPackageInfo = mPackageInfoField.get(baseContext);
+        // mApplication = app
+        Class<?> loadedApkClass = Class.forName("android.app.LoadedApk");
+        Field mApplicationField = loadedApkClass.getDeclaredField("mApplication");
+        mApplicationField.setAccessible(true);
+        mApplicationField.set(mPackageInfo, delegate);
+
+        // 5.ActivityThread.mInitialApplication
+        Field mInitialApplicationField = activityThreadClass.getDeclaredField("mInitialApplication");
+        mInitialApplicationField.setAccessible(true);
+        mInitialApplicationField.set(mMainThread, delegate);
+
+        // 6.修改ApplicationInfo.className
+        Field mApplicationInfoField = loadedApkClass.getDeclaredField("mApplicationInfo");
+        mApplicationInfoField.setAccessible(true);
+        ApplicationInfo mApplicationInfo = (ApplicationInfo) mApplicationInfoField.get(mPackageInfo);
+        mApplicationInfo.className = app_name;
+
+        delegate.onCreate();
+        isBindReal = true;
     }
 }
