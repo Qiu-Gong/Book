@@ -5,13 +5,13 @@
 - dongNao 《动脑课程》
 - eventBus 简单手写例子
 - greenDao 简单手写例子
-- okhttp 简单手写例子
 - rxjava 简单手写例子
+- okhttp 简单手写例子
 - glide 简单手写例子
 - videoCache 源码分析
+- retrofit 简单使用
 - thinker 实现代码修复
 - encrypt_app / encrypt_core app加固
-- retrofit 简单使用
 - leakCanary 简单使用
 - blockCanary 简单使用
 
