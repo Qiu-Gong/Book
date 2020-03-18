@@ -4,3 +4,4 @@ include ':encrypt_core', ':encrypt_app'
 include ':retrofit', ':leakcanary', ':blockcanary'
 
 rootProject.name = 'Book'
+include ':skin_app', ':skin_core'
