@@ -1,6 +1,7 @@
 package com.qiugong.skin_app;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -9,11 +10,13 @@ import androidx.appcompat.app.AppCompatDelegate;
  */
 public class MyApplication extends Application {
 
+    private static final String TAG = "MyApplication";
+
     @Override
     public void onCreate() {
         super.onCreate();
         boolean isNightMode = NightModeConfig.getInstance().getNightMode(getApplicationContext());
-//        AppCompatDelegate.setDefaultNightMode(isNightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        AppCompatDelegate.setDefaultNightMode(isNightMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
+        Log.d(TAG, isNightMode ? "夜间模式" : "日间模式");
     }
 }

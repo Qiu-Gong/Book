@@ -28,7 +28,7 @@ class NightModeConfig {
         return mSharedPreference.getBoolean(IS_NIGHT_MODE, false);
     }
 
-    public void setNightMode(Context context, boolean isNightMode) {
+    void setNightMode(Context context, boolean isNightMode) {
         if (mSharedPreference == null) {
             mSharedPreference = context.getSharedPreferences(NIGHT_MODE, Context.MODE_PRIVATE);
         }
