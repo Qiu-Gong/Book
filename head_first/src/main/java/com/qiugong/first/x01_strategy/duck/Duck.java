@@ -1,4 +1,4 @@
-package com.qiugong.first.x01_strategy;
+package com.qiugong.first.x01_strategy.duck;
 
 import com.qiugong.first.x01_strategy.fly.FlyBehavior;
 import com.qiugong.first.x01_strategy.quack.QuackBehavior;

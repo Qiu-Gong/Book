@@ -1,5 +1,6 @@
-package com.qiugong.first.x01_strategy;
+package com.qiugong.first.x01_strategy.duck;
 
+import com.qiugong.first.x01_strategy.duck.Duck;
 import com.qiugong.first.x01_strategy.fly.FlyWithWings;
 import com.qiugong.first.x01_strategy.quack.Quack;
 

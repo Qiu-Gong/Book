@@ -1,5 +1,8 @@
 package com.qiugong.first.x01_strategy;
 
+import com.qiugong.first.x01_strategy.duck.Duck;
+import com.qiugong.first.x01_strategy.duck.MallardDuck;
+import com.qiugong.first.x01_strategy.duck.ModelDuck;
 import com.qiugong.first.x01_strategy.fly.FlyRocketPowered;
 
 public class MiniDuckSimulator {
