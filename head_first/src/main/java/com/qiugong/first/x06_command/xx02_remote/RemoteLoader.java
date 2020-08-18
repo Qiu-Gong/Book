@@ -1,47 +1,50 @@
 package com.qiugong.first.x06_command.xx02_remote;
 
-import com.qiugong.first.x06_command.xx02_remote.ceiling.CeilingFan;
-import com.qiugong.first.x06_command.xx02_remote.ceiling.CeilingFanHighCommand;
-import com.qiugong.first.x06_command.xx02_remote.ceiling.CeilingFanMediumCommand;
-import com.qiugong.first.x06_command.xx02_remote.ceiling.CeilingFanOffCommand;
+import com.qiugong.first.x06_command.xx02_remote.hottub.Hottub;
+import com.qiugong.first.x06_command.xx02_remote.hottub.HottubOffCommand;
+import com.qiugong.first.x06_command.xx02_remote.hottub.HottubOnCommand;
 import com.qiugong.first.x06_command.xx02_remote.light.Light;
 import com.qiugong.first.x06_command.xx02_remote.light.LightOffCommand;
 import com.qiugong.first.x06_command.xx02_remote.light.LightOnCommand;
+import com.qiugong.first.x06_command.xx02_remote.stereo.Stereo;
+import com.qiugong.first.x06_command.xx02_remote.stereo.StereoOffCommand;
+import com.qiugong.first.x06_command.xx02_remote.stereo.StereoOnCommand;
+import com.qiugong.first.x06_command.xx02_remote.tv.TV;
+import com.qiugong.first.x06_command.xx02_remote.tv.TVOffCommand;
+import com.qiugong.first.x06_command.xx02_remote.tv.TVOnCommand;
 
 public class RemoteLoader {
 
-    public static void main(String[] args) {
-        RemoteControlWithUndo remoteControl = new RemoteControlWithUndo();
+	public static void main(String[] args) {
 
-        Light livingRoomLight = new Light("Living Room");
-        LightOnCommand livingRoomLightOn = new LightOnCommand(livingRoomLight);
-        LightOffCommand livingRoomLightOff = new LightOffCommand(livingRoomLight);
-        remoteControl.setCommand(0, livingRoomLightOn, livingRoomLightOff);
+		RemoteControl remoteControl = new RemoteControl();
 
-        remoteControl.onButtonWasPushed(0);
-        remoteControl.offButtonWasPushed(0);
-        System.out.println(remoteControl);
-        remoteControl.undoButtonWasPushed();
-        remoteControl.offButtonWasPushed(0);
-        remoteControl.onButtonWasPushed(0);
-        System.out.println(remoteControl);
-        remoteControl.undoButtonWasPushed();
+		Light light = new Light("Living Room");
+		TV tv = new TV("Living Room");
+		Stereo stereo = new Stereo("Living Room");
+		Hottub hottub = new Hottub();
+ 
+		LightOnCommand lightOn = new LightOnCommand(light);
+		StereoOnCommand stereoOn = new StereoOnCommand(stereo);
+		TVOnCommand tvOn = new TVOnCommand(tv);
+		HottubOnCommand hottubOn = new HottubOnCommand(hottub);
+		LightOffCommand lightOff = new LightOffCommand(light);
+		StereoOffCommand stereoOff = new StereoOffCommand(stereo);
+		TVOffCommand tvOff = new TVOffCommand(tv);
+		HottubOffCommand hottubOff = new HottubOffCommand(hottub);
 
-        CeilingFan ceilingFan = new CeilingFan("Living Room");
-        CeilingFanMediumCommand ceilingFanMedium = new CeilingFanMediumCommand(ceilingFan);
-        CeilingFanHighCommand ceilingFanHigh = new CeilingFanHighCommand(ceilingFan);
-        CeilingFanOffCommand ceilingFanOff = new CeilingFanOffCommand(ceilingFan);
-
-        remoteControl.setCommand(0, ceilingFanMedium, ceilingFanOff);
-        remoteControl.setCommand(1, ceilingFanHigh, ceilingFanOff);
-
-        remoteControl.onButtonWasPushed(0);
-        remoteControl.offButtonWasPushed(0);
-        System.out.println(remoteControl);
-        remoteControl.undoButtonWasPushed();
-
-        remoteControl.onButtonWasPushed(1);
-        System.out.println(remoteControl);
-        remoteControl.undoButtonWasPushed();
-    }
+		Command[] partyOn = { lightOn, stereoOn, tvOn, hottubOn};
+		Command[] partyOff = { lightOff, stereoOff, tvOff, hottubOff};
+  
+		MacroCommand partyOnMacro = new MacroCommand(partyOn);
+		MacroCommand partyOffMacro = new MacroCommand(partyOff);
+ 
+		remoteControl.setCommand(0, partyOnMacro, partyOffMacro);
+  
+		System.out.println(remoteControl);
+		System.out.println("--- Pushing Macro On---");
+		remoteControl.onButtonWasPushed(0);
+		System.out.println("--- Pushing Macro Off---");
+		remoteControl.offButtonWasPushed(0);
+	}
 }
