@@ -1,4 +1,4 @@
-package com.qiugong.first.x07_adapter.cls;
+package com.qiugong.first.x07_adapter;
 
 public interface Duck {
 	public void quack();

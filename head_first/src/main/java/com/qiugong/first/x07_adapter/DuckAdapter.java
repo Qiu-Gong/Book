@@ -1,4 +1,4 @@
-package com.qiugong.first.x07_adapter.cls;
+package com.qiugong.first.x07_adapter;
 import java.util.Random;
 
 public class DuckAdapter implements Turkey {
