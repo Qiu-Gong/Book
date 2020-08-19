@@ -1,4 +1,4 @@
-package com.qiugong.first.x08_facade;
+package com.qiugong.first.x07_facade;
 
 public class Screen {
 	String description;
