@@ -42,7 +42,7 @@ public class PancakeHouseMenu implements Menu {
 	}
   
 	public Iterator createIterator() {
-		return new PancakeHouseMenuIterator(menuItems);
+		return menuItems.iterator();
 	}
   
 	public String toString() {
