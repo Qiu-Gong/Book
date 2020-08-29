@@ -1,8 +1,10 @@
 package com.qiugong.first.x09_composite;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Menu extends MenuComponent {
+    Iterator<MenuComponent> iterator = null;
     ArrayList<MenuComponent> menuComponents = new ArrayList<>();
     String name;
     String description;
@@ -32,13 +34,20 @@ public class Menu extends MenuComponent {
         return description;
     }
 
+    public Iterator<MenuComponent> createIterator() {
+        if (iterator == null) {
+            iterator = new CompositeIterator(menuComponents.iterator());
+        }
+        return iterator;
+    }
+
     public void print() {
         System.out.print("\n" + getName());
         System.out.println(", " + getDescription());
         System.out.println("---------------------");
 
-		for (MenuComponent menuComponent : menuComponents) {
-			menuComponent.print();
-		}
+        for (MenuComponent menuComponent : menuComponents) {
+            menuComponent.print();
+        }
     }
 }
