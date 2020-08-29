@@ -1,4 +1,4 @@
-package com.qiugong.first.x11_proxy;
+package com.qiugong.first.x11_proxy.remote;
 
 import java.rmi.*;
 

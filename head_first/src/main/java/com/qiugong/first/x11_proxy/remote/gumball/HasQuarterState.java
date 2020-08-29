@@ -1,4 +1,4 @@
-package com.qiugong.first.x11_proxy.gumball;
+package com.qiugong.first.x11_proxy.remote.gumball;
 
 import java.util.Random;
 

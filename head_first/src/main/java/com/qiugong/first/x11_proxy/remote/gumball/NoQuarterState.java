@@ -1,4 +1,4 @@
-package com.qiugong.first.x11_proxy.gumball;
+package com.qiugong.first.x11_proxy.remote.gumball;
 
 public class NoQuarterState implements State {
     transient GumballMachine gumballMachine;

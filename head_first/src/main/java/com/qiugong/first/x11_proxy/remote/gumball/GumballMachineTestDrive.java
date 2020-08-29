@@ -1,6 +1,6 @@
-package com.qiugong.first.x11_proxy.gumball;
+package com.qiugong.first.x11_proxy.remote.gumball;
 
-import com.qiugong.first.x11_proxy.GumballMachineRemote;
+import com.qiugong.first.x11_proxy.remote.GumballMachineRemote;
 
 import java.rmi.*;
 
