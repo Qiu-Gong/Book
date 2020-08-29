@@ -1,46 +1,29 @@
 package com.qiugong.first.x11_proxy.gumball;
 
+import com.qiugong.first.x11_proxy.GumballMachineRemote;
+
+import java.rmi.*;
+
 public class GumballMachineTestDrive {
 
     public static void main(String[] args) {
-        GumballMachine gumballMachine =
-                new GumballMachine(10);
+        args = new String[]{"seattle.mightygumball.com", "100"};
+        GumballMachineRemote gumballMachine = null;
+        int count;
 
-        System.out.println(gumballMachine);
+        if (args.length < 2) {
+            System.out.println("GumballMachine <name> <inventory>");
+            System.exit(1);
+        }
 
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
+        try {
+            count = Integer.parseInt(args[1]);
 
-        System.out.println(gumballMachine);
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-
-        System.out.println(gumballMachine);
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-
-        System.out.println(gumballMachine);
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-
-        System.out.println(gumballMachine);
-
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-        gumballMachine.insertQuarter();
-        gumballMachine.turnCrank();
-
-        System.out.println(gumballMachine);
+            gumballMachine =
+                    new GumballMachine(args[0], count);
+            Naming.rebind("//" + args[0] + "/x11_proxy/gumball", gumballMachine);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

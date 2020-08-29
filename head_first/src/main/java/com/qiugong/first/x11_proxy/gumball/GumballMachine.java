@@ -1,7 +1,13 @@
 package com.qiugong.first.x11_proxy.gumball;
 
-public class GumballMachine {
+import com.qiugong.first.x11_proxy.GumballMachineRemote;
 
+import java.rmi.*;
+import java.rmi.server.*;
+
+public class GumballMachine
+        extends UnicastRemoteObject implements GumballMachineRemote {
+    private static final long serialVersionUID = 2L;
     State soldOutState;
     State noQuarterState;
     State hasQuarterState;
@@ -10,8 +16,9 @@ public class GumballMachine {
 
     State state = soldOutState;
     int count = 0;
+    String location;
 
-    public GumballMachine(int numberGumballs) {
+    public GumballMachine(String location, int numberGumballs) throws RemoteException {
         soldOutState = new SoldOutState(this);
         noQuarterState = new NoQuarterState(this);
         hasQuarterState = new HasQuarterState(this);
@@ -22,6 +29,7 @@ public class GumballMachine {
         if (numberGumballs > 0) {
             state = noQuarterState;
         }
+        this.location = location;
     }
 
     public void insertQuarter() {
@@ -37,6 +45,10 @@ public class GumballMachine {
         state.dispense();
     }
 
+    void setState(State state) {
+        this.state = state;
+    }
+
     void releaseBall() {
         System.out.println("A gumball comes rolling out the slot...");
         if (count != 0) {
@@ -44,22 +56,21 @@ public class GumballMachine {
         }
     }
 
-    int getCount() {
+    public void refill(int count) {
+        this.count = count;
+        state = noQuarterState;
+    }
+
+    public int getCount() {
         return count;
-    }
-
-    void refill(int count) {
-        this.count += count;
-        System.out.println("The gumball machine was just refilled; it's new count is: " + this.count);
-        state.refill();
-    }
-
-    void setState(State state) {
-        this.state = state;
     }
 
     public State getState() {
         return state;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public State getSoldOutState() {
@@ -85,7 +96,7 @@ public class GumballMachine {
     public String toString() {
         StringBuffer result = new StringBuffer();
         result.append("\nMighty Gumball, Inc.");
-        result.append("\nJava-enabled Standing Gumball Model #2004");
+        result.append("\nJava-enabled Standing Gumball Model #2014");
         result.append("\nInventory: " + count + " gumball");
         if (count != 1) {
             result.append("s");

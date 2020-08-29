@@ -2,7 +2,7 @@ package com.qiugong.first.x11_proxy.gumball;
 
 public class SoldState implements State {
  
-    GumballMachine gumballMachine;
+    transient GumballMachine gumballMachine;
  
     public SoldState(GumballMachine gumballMachine) {
         this.gumballMachine = gumballMachine;

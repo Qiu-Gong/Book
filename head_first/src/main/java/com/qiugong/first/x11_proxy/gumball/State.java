@@ -1,6 +1,8 @@
 package com.qiugong.first.x11_proxy.gumball;
 
-public interface State {
+import java.io.Serializable;
+
+public interface State extends Serializable {
 
     public void insertQuarter();
 
