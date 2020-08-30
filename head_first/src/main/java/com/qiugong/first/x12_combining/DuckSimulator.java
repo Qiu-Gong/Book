@@ -3,23 +3,22 @@ package com.qiugong.first.x12_combining;
 import com.qiugong.first.x12_combining.adapter.Goose;
 import com.qiugong.first.x12_combining.adapter.GooseAdapter;
 import com.qiugong.first.x12_combining.decorator.QuackCounter;
-import com.qiugong.first.x12_combining.ducks.DuckCall;
-import com.qiugong.first.x12_combining.ducks.MallardDuck;
 import com.qiugong.first.x12_combining.ducks.Quackable;
-import com.qiugong.first.x12_combining.ducks.RedheadDuck;
-import com.qiugong.first.x12_combining.ducks.RubberDuck;
+import com.qiugong.first.x12_combining.factory.AbstractDuckFactory;
+import com.qiugong.first.x12_combining.factory.CountingDuckFactory;
 
 public class DuckSimulator {
     public static void main(String[] args) {
         DuckSimulator simulator = new DuckSimulator();
-        simulator.simulate();
+        AbstractDuckFactory duckFactory = new CountingDuckFactory();
+        simulator.simulate(duckFactory);
     }
 
-    void simulate() {
-        Quackable mallardDuck = new QuackCounter(new MallardDuck());
-        Quackable redheadDuck = new QuackCounter(new RedheadDuck());
-        Quackable duckCall = new QuackCounter(new DuckCall());
-        Quackable rubberDuck = new QuackCounter(new RubberDuck());
+    void simulate(AbstractDuckFactory duckFactory) {
+        Quackable mallardDuck = duckFactory.createMallardDuck();
+        Quackable redheadDuck = duckFactory.createRedheadDuck();
+        Quackable duckCall = duckFactory.createDuckCall();
+        Quackable rubberDuck = duckFactory.createRubberDuck();
         Quackable gooseDuck = new GooseAdapter(new Goose());
 
         System.out.println("\nDuck Simulator");
