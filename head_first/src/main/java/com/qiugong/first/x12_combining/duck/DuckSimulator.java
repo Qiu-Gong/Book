@@ -1,13 +1,13 @@
-package com.qiugong.first.x12_combining;
+package com.qiugong.first.x12_combining.duck;
 
-import com.qiugong.first.x12_combining.adapter.Goose;
-import com.qiugong.first.x12_combining.adapter.GooseAdapter;
-import com.qiugong.first.x12_combining.composite.Flock;
-import com.qiugong.first.x12_combining.decorator.QuackCounter;
-import com.qiugong.first.x12_combining.ducks.Quackable;
-import com.qiugong.first.x12_combining.factory.AbstractDuckFactory;
-import com.qiugong.first.x12_combining.factory.CountingDuckFactory;
-import com.qiugong.first.x12_combining.observer.Quackologist;
+import com.qiugong.first.x12_combining.duck.adapter.Goose;
+import com.qiugong.first.x12_combining.duck.adapter.GooseAdapter;
+import com.qiugong.first.x12_combining.duck.composite.Flock;
+import com.qiugong.first.x12_combining.duck.decorator.QuackCounter;
+import com.qiugong.first.x12_combining.duck.ducks.Quackable;
+import com.qiugong.first.x12_combining.duck.factory.AbstractDuckFactory;
+import com.qiugong.first.x12_combining.duck.factory.CountingDuckFactory;
+import com.qiugong.first.x12_combining.duck.observer.Quackologist;
 
 public class DuckSimulator {
     public static void main(String[] args) {

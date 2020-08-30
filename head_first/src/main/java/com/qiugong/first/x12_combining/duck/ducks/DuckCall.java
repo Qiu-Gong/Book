@@ -1,17 +1,17 @@
-package com.qiugong.first.x12_combining.ducks;
+package com.qiugong.first.x12_combining.duck.ducks;
 
-import com.qiugong.first.x12_combining.observer.Observable;
-import com.qiugong.first.x12_combining.observer.Observer;
+import com.qiugong.first.x12_combining.duck.observer.Observable;
+import com.qiugong.first.x12_combining.duck.observer.Observer;
 
-public class RedheadDuck implements Quackable {
+public class DuckCall implements Quackable {
 	Observable observable;
 
-	public RedheadDuck() {
+	public DuckCall() {
 		observable = new Observable(this);
 	}
 
 	public void quack() {
-		System.out.println("Quack");
+		System.out.println("Kwak");
 		notifyObservers();
 	}
 
@@ -24,6 +24,6 @@ public class RedheadDuck implements Quackable {
 	}
 
 	public String toString() {
-		return "Redhead Duck";
+		return "Duck Call";
 	}
 }

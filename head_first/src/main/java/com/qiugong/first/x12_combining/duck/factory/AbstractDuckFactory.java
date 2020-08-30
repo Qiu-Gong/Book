@@ -1,6 +1,6 @@
-package com.qiugong.first.x12_combining.factory;
+package com.qiugong.first.x12_combining.duck.factory;
 
-import com.qiugong.first.x12_combining.ducks.Quackable;
+import com.qiugong.first.x12_combining.duck.ducks.Quackable;
 
 public abstract class AbstractDuckFactory {
 

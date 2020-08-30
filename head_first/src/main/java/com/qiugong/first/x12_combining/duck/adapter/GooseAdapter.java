@@ -1,8 +1,8 @@
-package com.qiugong.first.x12_combining.adapter;
+package com.qiugong.first.x12_combining.duck.adapter;
 
-import com.qiugong.first.x12_combining.ducks.Quackable;
-import com.qiugong.first.x12_combining.observer.Observable;
-import com.qiugong.first.x12_combining.observer.Observer;
+import com.qiugong.first.x12_combining.duck.ducks.Quackable;
+import com.qiugong.first.x12_combining.duck.observer.Observable;
+import com.qiugong.first.x12_combining.duck.observer.Observer;
 
 public class GooseAdapter implements Quackable {
     Goose goose;

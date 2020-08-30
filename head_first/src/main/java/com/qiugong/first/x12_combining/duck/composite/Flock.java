@@ -1,7 +1,7 @@
-package com.qiugong.first.x12_combining.composite;
+package com.qiugong.first.x12_combining.duck.composite;
 
-import com.qiugong.first.x12_combining.ducks.Quackable;
-import com.qiugong.first.x12_combining.observer.Observer;
+import com.qiugong.first.x12_combining.duck.ducks.Quackable;
+import com.qiugong.first.x12_combining.duck.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,7 +1,7 @@
-package com.qiugong.first.x12_combining.decorator;
+package com.qiugong.first.x12_combining.duck.decorator;
 
-import com.qiugong.first.x12_combining.ducks.Quackable;
-import com.qiugong.first.x12_combining.observer.Observer;
+import com.qiugong.first.x12_combining.duck.ducks.Quackable;
+import com.qiugong.first.x12_combining.duck.observer.Observer;
 
 public class QuackCounter implements Quackable {
     Quackable duck;

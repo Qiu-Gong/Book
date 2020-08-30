@@ -1,10 +1,10 @@
-package com.qiugong.first.x12_combining.factory;
+package com.qiugong.first.x12_combining.duck.factory;
 
-import com.qiugong.first.x12_combining.ducks.DuckCall;
-import com.qiugong.first.x12_combining.ducks.MallardDuck;
-import com.qiugong.first.x12_combining.ducks.Quackable;
-import com.qiugong.first.x12_combining.ducks.RedheadDuck;
-import com.qiugong.first.x12_combining.ducks.RubberDuck;
+import com.qiugong.first.x12_combining.duck.ducks.DuckCall;
+import com.qiugong.first.x12_combining.duck.ducks.MallardDuck;
+import com.qiugong.first.x12_combining.duck.ducks.Quackable;
+import com.qiugong.first.x12_combining.duck.ducks.RedheadDuck;
+import com.qiugong.first.x12_combining.duck.ducks.RubberDuck;
 
 public class DuckFactory extends AbstractDuckFactory {
 
