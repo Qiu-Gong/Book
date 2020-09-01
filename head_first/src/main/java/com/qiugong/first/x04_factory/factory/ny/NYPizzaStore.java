@@ -1,8 +1,11 @@
-package com.qiugong.first.x04_factory.factory;
+package com.qiugong.first.x04_factory.factory.ny;
+
+import com.qiugong.first.x04_factory.factory.Pizza;
+import com.qiugong.first.x04_factory.factory.PizzaStore;
 
 public class NYPizzaStore extends PizzaStore {
 
-    Pizza createPizza(String item) {
+    public Pizza createPizza(String item) {
         if (item.equals("cheese")) {
             return new NYStyleCheesePizza();
         } else if (item.equals("veggie")) {

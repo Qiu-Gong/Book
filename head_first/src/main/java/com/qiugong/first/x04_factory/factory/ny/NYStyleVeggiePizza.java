@@ -1,4 +1,6 @@
-package com.qiugong.first.x04_factory.factory;
+package com.qiugong.first.x04_factory.factory.ny;
+
+import com.qiugong.first.x04_factory.factory.Pizza;
 
 public class NYStyleVeggiePizza extends Pizza {
 

@@ -2,7 +2,7 @@ package com.qiugong.first.x04_factory.factory;
 
 public abstract class PizzaStore {
  
-	abstract Pizza createPizza(String item);
+	public abstract Pizza createPizza(String item);
  
 	public Pizza orderPizza(String type) {
 		Pizza pizza = createPizza(type);

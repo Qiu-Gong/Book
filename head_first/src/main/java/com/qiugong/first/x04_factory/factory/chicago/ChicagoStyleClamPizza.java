@@ -1,4 +1,6 @@
-package com.qiugong.first.x04_factory.factory;
+package com.qiugong.first.x04_factory.factory.chicago;
+
+import com.qiugong.first.x04_factory.factory.Pizza;
 
 public class ChicagoStyleClamPizza extends Pizza {
 	public ChicagoStyleClamPizza() {

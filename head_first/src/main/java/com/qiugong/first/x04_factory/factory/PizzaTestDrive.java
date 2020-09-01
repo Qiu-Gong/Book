@@ -1,5 +1,8 @@
 package com.qiugong.first.x04_factory.factory;
 
+import com.qiugong.first.x04_factory.factory.chicago.ChicagoPizzaStore;
+import com.qiugong.first.x04_factory.factory.ny.NYPizzaStore;
+
 public class PizzaTestDrive {
  
 	public static void main(String[] args) {
