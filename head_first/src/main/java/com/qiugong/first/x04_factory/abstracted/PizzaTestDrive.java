@@ -1,7 +1,9 @@
 package com.qiugong.first.x04_factory.abstracted;
 
-import com.qiugong.first.x04_factory.abstracted.ChicagoPizza.ChicagoPizzaStore;
-import com.qiugong.first.x04_factory.abstracted.NYPizza.NYPizzaStore;
+import com.qiugong.first.x04_factory.abstracted.pizza.Pizza;
+import com.qiugong.first.x04_factory.abstracted.store.ChicagoPizzaStore;
+import com.qiugong.first.x04_factory.abstracted.store.NYPizzaStore;
+import com.qiugong.first.x04_factory.abstracted.store.PizzaStore;
 
 public class PizzaTestDrive {
 
