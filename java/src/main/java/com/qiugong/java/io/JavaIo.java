@@ -1,9 +1,18 @@
 package com.qiugong.java.io;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.channels.FileChannel;
@@ -111,6 +120,90 @@ public class JavaIo {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static void listAllFiles(File dir) {
+        if (dir == null || !dir.exists()) {
+            return;
+        }
+        if (dir.isFile()) {
+            System.out.println(dir.getName());
+            return;
+        }
+        for (File file : dir.listFiles()) {
+            listAllFiles(file);
+        }
+    }
+
+    public static void copyFile(String src, String dist) throws IOException {
+        FileInputStream in = new FileInputStream(src);
+        FileOutputStream out = new FileOutputStream(dist);
+        byte[] buffer = new byte[20 * 1024];
+        int cnt;
+        // read() 最多读取 buffer.length 个字节
+        // 返回的是实际读取的个数
+        // 返回 -1 的时候表示读到 eof，即文件尾
+        while ((cnt = in.read(buffer, 0, buffer.length)) != -1) {
+            out.write(buffer, 0, cnt);
+        }
+        in.close();
+        out.close();
+    }
+
+    public static void readFileContent(String filePath) throws IOException {
+        FileReader fileReader = new FileReader(filePath);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            System.out.println(line);
+        }
+        // 装饰者模式使得 BufferedReader 组合了一个 Reader 对象
+        // 在调用 BufferedReader 的 close() 方法时会去调用 Reader 的 close() 方法
+        // 因此只要一个 close() 调用即可
+        bufferedReader.close();
+    }
+
+    public static void serializable() throws Exception {
+        A a1 = new A(123, "abc");
+        String objectFile = "file/a1";
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(objectFile));
+        objectOutputStream.writeObject(a1);
+        objectOutputStream.close();
+        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(objectFile));
+        A a2 = (A) objectInputStream.readObject();
+        objectInputStream.close();
+        System.out.println(a2);
+    }
+
+    public static void readUrl() throws Exception {
+        URL url = new URL("http://www.baidu.com");
+        /* 字节流 */
+        InputStream is = url.openStream();
+        /* 字符流 */
+        InputStreamReader isr = new InputStreamReader(is, "utf-8");
+
+        /* 提供缓存功能 */
+        BufferedReader br = new BufferedReader(isr);
+        String line;
+        while ((line = br.readLine()) != null) {
+            System.out.println(line);
+        }
+        br.close();
+    }
+
+    private static class A implements Serializable {
+        private int x;
+        private String y;
+
+        A(int x, String y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public String toString() {
+            return "x = " + x + " " + "y = " + y;
         }
     }
 }
