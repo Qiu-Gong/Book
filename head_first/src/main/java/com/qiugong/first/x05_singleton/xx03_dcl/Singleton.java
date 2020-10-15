@@ -1,4 +1,4 @@
-package com.qiugong.first.x05_singleton.dcl;
+package com.qiugong.first.x05_singleton.xx03_dcl;
 
 //
 // Danger!  This implementation of Singleton not

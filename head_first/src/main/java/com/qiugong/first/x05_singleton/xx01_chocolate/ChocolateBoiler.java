@@ -1,4 +1,4 @@
-package com.qiugong.first.x05_singleton.chocolate;
+package com.qiugong.first.x05_singleton.xx01_chocolate;
  
 public class ChocolateBoiler {
 	private boolean empty;

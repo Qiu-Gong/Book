@@ -1,4 +1,4 @@
-package com.qiugong.first.x05_singleton.threadsafe;
+package com.qiugong.first.x05_singleton.xx02_threadsafe;
 
 public class Singleton {
 	private static Singleton uniqueInstance;
