@@ -1,6 +1,8 @@
 package com.qiugong.first.x09_iterator;
 
-import java.util.*;
+import com.qiugong.first.x09_iterator.menu.CafeMenu;
+import com.qiugong.first.x09_iterator.menu.DinerMenu;
+import com.qiugong.first.x09_iterator.menu.PancakeHouseMenu;
 
 public class MenuTestDrive {
     public static void main(String args[]) {

@@ -1,5 +1,7 @@
 package com.qiugong.first.x09_iterator;
 
+import com.qiugong.first.x09_iterator.menu.Menu;
+
 import java.util.Iterator;
   
 public class Waitress {

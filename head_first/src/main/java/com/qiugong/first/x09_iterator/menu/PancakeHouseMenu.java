@@ -1,4 +1,7 @@
-package com.qiugong.first.x09_iterator;
+package com.qiugong.first.x09_iterator.menu;
+
+import com.qiugong.first.x09_iterator.MenuItem;
+import com.qiugong.first.x09_iterator.menu.Menu;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,7 +44,7 @@ public class PancakeHouseMenu implements Menu {
 		return menuItems;
 	}
   
-	public Iterator createIterator() {
+	public Iterator<MenuItem> createIterator() {
 		return menuItems.iterator();
 	}
   

@@ -2,7 +2,7 @@ package com.qiugong.first.x09_iterator;
 
 import java.util.Iterator;
 
-public class DinerMenuIterator implements Iterator {
+public class DinerMenuIterator implements Iterator<MenuItem> {
     MenuItem[] items;
     int position = 0;
 

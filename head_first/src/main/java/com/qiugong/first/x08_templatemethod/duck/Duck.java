@@ -1,4 +1,4 @@
-package com.qiugong.first.x08_templatemethod;
+package com.qiugong.first.x08_templatemethod.duck;
 
 public class Duck implements Comparable<Duck> {
 	String name;

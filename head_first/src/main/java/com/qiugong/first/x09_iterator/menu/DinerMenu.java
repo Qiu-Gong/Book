@@ -1,4 +1,7 @@
-package com.qiugong.first.x09_iterator;
+package com.qiugong.first.x09_iterator.menu;
+
+import com.qiugong.first.x09_iterator.DinerMenuIterator;
+import com.qiugong.first.x09_iterator.MenuItem;
 
 import java.util.Iterator;
 
@@ -41,7 +44,7 @@ public class DinerMenu implements Menu {
         return menuItems;
     }
 
-    public Iterator createIterator() {
+    public Iterator<MenuItem> createIterator() {
         return new DinerMenuIterator(menuItems);
     }
 }

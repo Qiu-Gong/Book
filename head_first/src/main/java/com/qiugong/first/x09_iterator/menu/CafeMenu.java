@@ -1,9 +1,12 @@
-package com.qiugong.first.x09_iterator;
+package com.qiugong.first.x09_iterator.menu;
+
+import com.qiugong.first.x09_iterator.MenuItem;
+import com.qiugong.first.x09_iterator.menu.Menu;
 
 import java.util.*;
 
 public class CafeMenu implements Menu {
-	HashMap<String, MenuItem> menuItems = new HashMap<String, MenuItem>();
+	HashMap<String, MenuItem> menuItems = new HashMap<>();
   
 	public CafeMenu() {
 		addItem("Veggie Burger and Air Fries",
