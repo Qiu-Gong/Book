@@ -14,10 +14,11 @@ public class MiniDuckSimulator {
 	public static void main(String[] args) {
  
 		MallardDuck mallard = new MallardDuck();
+		mallard.performQuack();// Quack
+
 		FlyBehavior cantFly = () -> System.out.println("I can't fly");
 		QuackBehavior squeak = () -> System.out.println("Squeak");
 		RubberDuck rubberDuckie = new RubberDuck(cantFly, squeak);
-		mallard.performQuack();// Quack
 		rubberDuckie.performQuack();// Squeak
 
 		DecoyDuck decoy = new DecoyDuck();
