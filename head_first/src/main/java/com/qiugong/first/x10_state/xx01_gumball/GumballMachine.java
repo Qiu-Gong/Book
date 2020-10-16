@@ -1,4 +1,4 @@
-package com.qiugong.first.x10_state.gumball;
+package com.qiugong.first.x10_state.xx01_gumball;
 
 public class GumballMachine {
 

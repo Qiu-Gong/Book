@@ -7,6 +7,7 @@ public class MenuTestDrive {
         MenuComponent dinerMenu = new Menu("DINER MENU", "Lunch");
         MenuComponent cafeMenu = new Menu("CAFE MENU", "Dinner");
         MenuComponent dessertMenu = new Menu("DESSERT MENU", "Dessert of course!");
+
         MenuComponent allMenus = new Menu("ALL MENUS", "All menus combined");
         allMenus.add(pancakeHouseMenu);
         allMenus.add(dinerMenu);
@@ -100,9 +101,6 @@ public class MenuTestDrive {
                 4.29));
 
         Waitress waitress = new Waitress(allMenus);
-
         waitress.printVegetarianMenu();
-        //waitress.printMenu();
-
     }
 }

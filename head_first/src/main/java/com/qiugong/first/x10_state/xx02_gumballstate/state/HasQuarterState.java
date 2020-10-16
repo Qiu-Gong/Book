@@ -1,4 +1,7 @@
-package com.qiugong.first.x10_state.gumballstate;
+package com.qiugong.first.x10_state.xx02_gumballstate.state;
+
+import com.qiugong.first.x10_state.xx02_gumballstate.GumballMachine;
+import com.qiugong.first.x10_state.xx02_gumballstate.state.State;
 
 import java.util.Random;
 

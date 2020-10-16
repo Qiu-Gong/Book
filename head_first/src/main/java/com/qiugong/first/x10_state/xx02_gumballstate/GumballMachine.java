@@ -1,4 +1,11 @@
-package com.qiugong.first.x10_state.gumballstate;
+package com.qiugong.first.x10_state.xx02_gumballstate;
+
+import com.qiugong.first.x10_state.xx02_gumballstate.state.HasQuarterState;
+import com.qiugong.first.x10_state.xx02_gumballstate.state.NoQuarterState;
+import com.qiugong.first.x10_state.xx02_gumballstate.state.SoldOutState;
+import com.qiugong.first.x10_state.xx02_gumballstate.state.SoldState;
+import com.qiugong.first.x10_state.xx02_gumballstate.state.State;
+import com.qiugong.first.x10_state.xx02_gumballstate.state.WinnerState;
 
 public class GumballMachine {
 
@@ -37,14 +44,14 @@ public class GumballMachine {
         state.dispense();
     }
 
-    void releaseBall() {
+    public void releaseBall() {
         System.out.println("A gumball comes rolling out the slot...");
         if (count != 0) {
             count = count - 1;
         }
     }
 
-    int getCount() {
+    public int getCount() {
         return count;
     }
 
@@ -54,7 +61,7 @@ public class GumballMachine {
         state.refill();
     }
 
-    void setState(State state) {
+    public void setState(State state) {
         this.state = state;
     }
 
