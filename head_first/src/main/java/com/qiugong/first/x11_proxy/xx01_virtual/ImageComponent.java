@@ -1,4 +1,4 @@
-package com.qiugong.first.x11_proxy.virtual;
+package com.qiugong.first.x11_proxy.xx01_virtual;
 
 import java.awt.*;
 import javax.swing.*;

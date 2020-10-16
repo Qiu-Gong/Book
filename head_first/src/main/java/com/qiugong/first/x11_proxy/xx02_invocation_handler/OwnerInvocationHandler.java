@@ -1,4 +1,4 @@
-package com.qiugong.first.x11_proxy.invocation_handler;
+package com.qiugong.first.x11_proxy.xx02_invocation_handler;
 
 import java.lang.reflect.*;
 

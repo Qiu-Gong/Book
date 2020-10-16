@@ -1,6 +1,6 @@
-package com.qiugong.first.x11_proxy.remote;
+package com.qiugong.first.x11_proxy.xx03_remote;
 
-import com.qiugong.first.x11_proxy.remote.gumball.State;
+import com.qiugong.first.x11_proxy.xx03_remote.gumball.State;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

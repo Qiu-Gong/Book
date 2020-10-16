@@ -1,4 +1,4 @@
-package com.qiugong.first.x11_proxy.remote.gumball;
+package com.qiugong.first.x11_proxy.xx03_remote.gumball;
 
 public class SoldOutState implements State {
     transient GumballMachine gumballMachine;
