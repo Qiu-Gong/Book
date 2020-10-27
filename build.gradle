@@ -9,6 +9,9 @@ buildscript {
         versionCode = 1
         versionName = '1.0'
         kotlin_version = '1.4.0'
+
+        sourceCompat = "8"
+        targetCompat = "8"
     }
     repositories {
         google()
