@@ -1,4 +1,4 @@
-include ':koltin'
+include ':kotlin'
 include ':artisticprobes', ':advance', ':java', ':dongnao'
 include ':eventbus', ':greendao', ':okhttp', ':rxjava', ':glide', ':videocache', ':tinker'
 include ':encrypt_core', ':encrypt_app'

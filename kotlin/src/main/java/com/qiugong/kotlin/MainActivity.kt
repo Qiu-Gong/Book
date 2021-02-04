@@ -1,11 +1,10 @@
-package com.qiugong.koltin
+package com.qiugong.kotlin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.CoroutineStart
 import java.util.concurrent.atomic.AtomicBoolean
 
 class MainActivity : AppCompatActivity() {
@@ -36,8 +35,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         val at :AtomicBoolean
-
-        CoroutineScope
     }
 }
 

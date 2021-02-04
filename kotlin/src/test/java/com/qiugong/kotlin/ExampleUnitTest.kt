@@ -1,4 +1,4 @@
-package com.qiugong.koltin
+package com.qiugong.kotlin
 
 import org.junit.Test
 

@@ -2,6 +2,7 @@
 - artisticProbes 《Android 艺术探索》
 - advance 《Android 进阶解密》
 - java 《基础知识-Java部分》
+- kotlin 简单测试
 - dongNao 《动脑课程》
 - eventBus 简单手写例子
 - greenDao 简单手写例子
@@ -16,6 +17,7 @@
 - blockCanary 简单使用
 - head_first HeadFirst 设计模式书籍
 - lagou 拉勾教育 - Android 工程师进阶 34 讲
+- skin_01/skin_app/skin_core 换肤工程
 
 可以通过 EditConfig 来配置指定 Activity，这样就能任意打开想要的 Activity 界面。
 
